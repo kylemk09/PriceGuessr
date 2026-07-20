@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  var DAILY_EPOCH = Date.UTC(2026, 0, 1); // arbitrary "PriceGuessr Day 1"
+  var DAILY_EPOCH = Date.UTC(2026, 0, 1); // arbitrary "ValueGuessr Day 1"
 
   function puzzleNumber(dailyKey) {
     if (!dailyKey) return null;
@@ -25,8 +25,8 @@
   function buildText(data) {
     var num = puzzleNumber(data.dailyKey);
     var titleLine = data.mode === 'daily' && num
-      ? 'PriceGuessr #' + num + ' \u{1F3E0}'
-      : 'PriceGuessr \u{1F3E0}';
+      ? 'ValueGuessr #' + num + ' \u{1F3E0}'
+      : 'ValueGuessr \u{1F3E0}';
     var emojis = data.roundResults.map(function (r) { return r.tierEmoji; }).join('');
     var link = (typeof window !== 'undefined' && window.location) ? window.location.origin : '';
 
@@ -63,7 +63,7 @@
     ctx.fillStyle = '#f5f6f7';
     ctx.font = '700 34px "Space Grotesk", sans-serif';
     var num = puzzleNumber(data.dailyKey);
-    var title = data.mode === 'daily' && num ? 'PriceGuessr #' + num : 'PriceGuessr';
+    var title = data.mode === 'daily' && num ? 'ValueGuessr #' + num : 'ValueGuessr';
     ctx.fillText('\u{1F3E0} ' + title, w / 2, 90);
 
     // Mode label
@@ -113,7 +113,7 @@
     // Footer
     ctx.fillStyle = '#6b6b74';
     ctx.font = '500 20px Inter, sans-serif';
-    var link = (typeof window !== 'undefined' && window.location) ? window.location.host : 'priceguessr.app';
+    var link = (typeof window !== 'undefined' && window.location) ? window.location.host : 'valueguessr.app';
     ctx.fillText('Play at ' + link, w / 2, 600);
 
     ctx.fillStyle = '#4a4a52';

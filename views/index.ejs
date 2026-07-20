@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0a0a0a" />
-  <title>PriceGuessr — Guess the Price, Keep the Streak</title>
+  <title>ValueGuessr — Guess the Price, Keep the Streak</title>
   <meta name="description" content="A fast-paced, Wordle-style real estate price guessing game." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,10 +18,15 @@
   <div class="app">
     <!-- Top bar: brand + live player counter -->
     <header class="topbar">
-      <div class="brand">
-        <span class="brand-mark">🏠</span>
-        <span class="brand-name">Price<span class="accent">Guessr</span></span>
-      </div>
+      <button class="brand-btn" id="logoBtn" type="button" aria-label="ValueGuessr home">
+        <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+          <rect x="1.5" y="1.5" width="41" height="41" rx="12" class="brand-mark-bg" />
+          <path d="M22 8.5 L35 19 V33.5 H9 V19 Z" class="brand-mark-house" />
+          <path d="M15 25 L19.5 20 L23.5 23.5 L29.5 16.5" class="brand-mark-trend" />
+          <path d="M23.5 16.5 H29.5 V22.5" class="brand-mark-trend" />
+        </svg>
+        <span class="brand-name">Value<span class="accent">Guessr</span></span>
+      </button>
       <div class="live-counter" id="liveCounter" title="Players active right now">
         <span class="live-dot" aria-hidden="true"></span>
         <span id="liveCount">12,847</span> playing now
@@ -101,8 +106,8 @@
             <p class="property-location" id="propertyLocation">—</p>
             <div class="property-stats">
               <div class="pstat"><span class="pstat-icon">📐</span><span id="statSqft">—</span> sqft</div>
-              <div class="pstat"><span class="pstat-icon">🛏️</span><span id="statBeds">—</span> bd</div>
-              <div class="pstat"><span class="pstat-icon">🛁</span><span id="statBaths">—</span> ba</div>
+              <div class="pstat"><span class="pstat-icon" id="pstatBedsIcon">🛏️</span><span id="statBeds">—</span> <span id="pstatBedsLabel">bd</span></div>
+              <div class="pstat" id="pstatBaths"><span class="pstat-icon">🛁</span><span id="statBaths">—</span> ba</div>
               <div class="pstat"><span class="pstat-icon">🏗️</span>Built <span id="statYear">—</span></div>
             </div>
             <p class="property-credit" id="propertyCredit" hidden></p>
@@ -110,6 +115,10 @@
         </div>
 
         <div class="glass card guess-card" id="guessCard">
+          <div class="currency-row">
+            <span class="currency-badge" id="currencyBadge">🇺🇸 Guessing in USD</span>
+            <button class="btn-roll" id="btnRollCurrency" type="button" title="Once per game: swap this round's currency for a random one">🎲 Roll Available</button>
+          </div>
           <div class="guess-display">
             <span class="guess-label">Your guess</span>
             <span class="guess-amount" id="guessAmount">$300,000</span>
@@ -179,6 +188,7 @@
             <button class="btn btn-ghost btn-lg" id="btnShareResult">📤 Share</button>
           </div>
           <div class="results-actions results-actions-secondary">
+            <button class="btn btn-outline" id="btnViewLeaderboard">🏆 Leaderboard</button>
             <button class="btn btn-outline" id="btnPlayAgain">Play Again</button>
             <button class="btn btn-outline" id="btnBackHome">Home</button>
           </div>
@@ -189,7 +199,7 @@
 
     <footer class="footer">
       <p>
-        🏠 PriceGuessr — property photos are real, freely-licensed photographs (credited under
+        🏠 ValueGuessr — property photos are real, freely-licensed photographs (credited under
         each photo where required). For regular houses, the address and price shown are
         <strong>illustrative</strong> — modeled on real market data, not the verified sale price of
         that exact home. Properties marked "🏛 Notable Property" are real, publicly documented
@@ -197,6 +207,46 @@
         guess. Nothing here is real-time property valuation or financial advice.
       </p>
     </footer>
+  </div>
+
+  <!-- Quit-game confirmation, shown when the logo is tapped mid-round -->
+  <div class="modal-overlay" id="quitConfirmOverlay" hidden>
+    <div class="glass card modal-card">
+      <h3 class="modal-title">Quit this game?</h3>
+      <p class="modal-body">Your progress in this game won't be saved.</p>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="btnCancelQuit">Cancel</button>
+        <button class="btn btn-primary" id="btnConfirmQuit">Quit &amp; Go Home</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaderboard name-submit prompt, shown once after the first game of the session -->
+  <div class="modal-overlay" id="leaderboardSubmitOverlay" hidden>
+    <div class="glass card modal-card">
+      <h3 class="modal-title">🏆 Nice game!</h3>
+      <p class="modal-body">Add your name to the leaderboard?</p>
+      <input type="text" class="name-input" id="leaderboardNameInput" placeholder="Your name" maxlength="20" autocomplete="off" />
+      <p class="modal-error" id="leaderboardSubmitError" hidden></p>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="btnSkipLeaderboard">No thanks</button>
+        <button class="btn btn-primary" id="btnSubmitName">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaderboard viewer -->
+  <div class="modal-overlay" id="leaderboardViewOverlay" hidden>
+    <div class="glass card modal-card leaderboard-card">
+      <h3 class="modal-title">🏆 Leaderboard</h3>
+      <div class="leaderboard-tabs">
+        <button class="leaderboard-tab" id="btnTabDaily" data-tab="daily">📅 Daily</button>
+        <button class="leaderboard-tab" id="btnTabQuick" data-tab="quick">⚡ Quick Play</button>
+      </div>
+      <p class="leaderboard-subtitle" id="leaderboardSubtitle">Today's Daily Challenge</p>
+      <ol class="leaderboard-list" id="leaderboardList"></ol>
+      <button class="btn btn-outline" id="btnCloseLeaderboard">Close</button>
+    </div>
   </div>
 
   <!-- Sound effects: drop free/CC0 .mp3 files into public/sounds/ named

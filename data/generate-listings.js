@@ -3,21 +3,26 @@
 // want to regenerate, or hand-edit listings.json directly to swap in real
 // listing data / a real API response later.
 //
-// Two real, freely-licensed data sources feed this:
-//   - data/research/commons-house-photos.json: real photographs of real
-//     ordinary houses, sourced from Wikimedia Commons under free licenses
-//     (public domain / CC0 / CC-BY / CC-BY-SA). Stats (address, sqft, beds,
-//     baths, price) for these are procedurally generated and illustrative --
-//     NOT verified facts about the literal house in the photo. See the
-//     in-app footer disclaimer.
-//   - data/research/famous-properties.json: a small curated set of real,
-//     famous, publicly documented properties (mansions/estates/penthouses)
-//     with real photos AND a real publicly reported sale price or estimated
-//     value, with a source note shown after each guess.
+// Real, freely-licensed data sources feed this:
+//   - data/research/commons-house-photos.json + commons-house-photos-batch2.json:
+//     real photographs of real ordinary houses, sourced from Wikimedia
+//     Commons under free licenses (public domain / CC0 / CC-BY / CC-BY-SA).
+//     Stats (address, sqft, beds, baths, price) for these are procedurally
+//     generated and illustrative -- NOT verified facts about the literal
+//     house in the photo. See the in-app footer disclaimer.
+//   - data/research/commons-commercial-photos.json: same idea, for ordinary
+//     commercial buildings (banks, motels, strip malls, small office
+//     buildings) -- stats/price also illustrative.
+//   - data/research/famous-properties.json + famous-commercial-properties.json:
+//     small curated sets of real, famous, publicly documented properties
+//     (mansions/estates/penthouses/office towers/hotels) with real photos
+//     AND a real publicly reported sale price or estimated value, with a
+//     source note shown after each guess.
 
 const fs = require('fs');
 const path = require('path');
 const { mulberry32 } = require('../lib/prng');
+const { currencyForLocation } = require('../lib/currencies');
 
 // Deterministic PRNG so the generated set is reproducible across machines.
 const rand = mulberry32(42);
@@ -64,6 +69,7 @@ const STREET_NAMES = [
 const STREET_TYPES = ['St', 'Ave', 'Ln', 'Dr', 'Ct', 'Way', 'Blvd', 'Rd', 'Ter'];
 
 const HOME_TYPES = ['Single Family', 'Townhouse', 'Condo', 'Bungalow', 'Ranch'];
+const COMMERCIAL_TYPES = ['Office Building', 'Office Tower', 'Retail Center', 'Hotel', 'Mixed-Use', 'Warehouse'];
 
 // Real listings are rarely priced at a flat round number -- agents commonly
 // price psychologically (ending in ,900 / ,500) or the market just lands on
@@ -85,10 +91,10 @@ function humanizePrice(raw) {
   return price;
 }
 
-// Several Commons categories contain many photos of the very same house
+// Several Commons categories contain many photos of the very same building
 // (numbered angles like "(1)"/"(2)") or of a whole tract of near-identical
 // houses shot as a numbered sequence. Collapse those down to one photo per
-// apparent real building so the same house never appears twice in the game.
+// apparent real building so the same one never appears twice in the game.
 function dedupeKey(entry) {
   const file = decodeURIComponent(entry.imageUrl.split('/').pop() || '');
   const base = file
@@ -110,16 +116,64 @@ function dedupePhotos(photos) {
   return result;
 }
 
+// Country-only strings ("USA", "Canada") aren't a usable city name -- fall
+// back to a real city rather than displaying the country as if it were one.
+// Must stay country-appropriate: falling back to a US city for a bare
+// "United Kingdom" would show e.g. "Albuquerque, NM" while still correctly
+// pricing in GBP (via currencyForLocation, which reads the untouched raw
+// string) -- a nonsensical combination. Each non-US country gets its own
+// small fallback pool; anything not listed here falls back to the US CITIES
+// pool, which is correct for "USA" / "U.S. Virgin Islands" / no location.
+const COUNTRY_FALLBACK_CITIES = {
+  'united kingdom': [['London', 'England'], ['Manchester', 'England'], ['Edinburgh', 'Scotland']],
+  uk: [['London', 'England'], ['Manchester', 'England'], ['Edinburgh', 'Scotland']],
+  canada: [['Toronto', 'ON'], ['Vancouver', 'BC'], ['Calgary', 'AB'], ['Montreal', 'QC']],
+  germany: [['Berlin', 'Germany'], ['Munich', 'Germany'], ['Hamburg', 'Germany']],
+  poland: [['Warsaw', 'Poland'], ['Krakow', 'Poland']],
+  sweden: [['Stockholm', 'Sweden'], ['Gothenburg', 'Sweden']],
+};
+const COUNTRY_ONLY_NAMES = new Set([
+  'usa', 'united states', 'u.s. virgin islands',
+  ...Object.keys(COUNTRY_FALLBACK_CITIES),
+]);
+
+// A handful of research entries only had a state name, not a city (e.g.
+// "Pennsylvania, USA") -- without this, parseLocation would show the state
+// name as both city and state ("Pennsylvania, Pennsylvania"). Substitute a
+// real city from that state (from CITIES) when we have one, else fall back
+// to a random city entirely.
+const US_STATE_ABBR = {
+  pennsylvania: 'PA', 'new mexico': 'NM', california: 'CA', ohio: 'OH',
+  texas: 'TX', florida: 'FL', 'north carolina': 'NC', tennessee: 'TN',
+};
+
+function cityForStateAbbr(abbr) {
+  const match = CITIES.find(([, state]) => state === abbr);
+  return match ? match[0] : null;
+}
+
 function parseLocation(roughLocation) {
   if (!roughLocation) {
     const [city, state] = pick(CITIES);
     return { city, state };
   }
   const parts = roughLocation.split(',').map((s) => s.trim()).filter(Boolean);
+  if (parts.length === 2 && US_STATE_ABBR[parts[0].toLowerCase()] && parts[1].toUpperCase() === 'USA') {
+    const abbr = US_STATE_ABBR[parts[0].toLowerCase()];
+    const city = cityForStateAbbr(abbr);
+    if (city) return { city, state: abbr };
+    const [fallbackCity, fallbackState] = pick(CITIES);
+    return { city: fallbackCity, state: fallbackState };
+  }
   if (parts.length >= 2) {
     const last = parts[parts.length - 1];
     const state = last.toUpperCase() === 'USA' ? parts[parts.length - 2] || '' : last;
     return { city: parts[0], state };
+  }
+  if (parts.length === 1 && COUNTRY_ONLY_NAMES.has(parts[0].toLowerCase())) {
+    const countryPool = COUNTRY_FALLBACK_CITIES[parts[0].toLowerCase()];
+    const [city, state] = countryPool ? pick(countryPool) : pick(CITIES);
+    return { city, state };
   }
   return { city: parts[0] || 'Unknown', state: '' };
 }
@@ -155,10 +209,56 @@ function buildRegularListing(id, photo) {
     city,
     state,
     homeType,
+    category: 'residential',
+    currency: currencyForLocation(photo.roughLocation),
     price,
     sqft,
     beds,
     baths,
+    floors: null,
+    yearBuilt,
+    image: photo.imageUrl,
+    imageCredit: `${photo.attribution} — ${photo.license}, via Wikimedia Commons`,
+    isFamous: false,
+  };
+}
+
+function buildCommercialListing(id, photo) {
+  const buildingType = COMMERCIAL_TYPES.includes(photo.suggestedBuildingType) ? photo.suggestedBuildingType : 'Office Building';
+  const { city, state } = parseLocation(photo.roughLocation);
+  const mult = multiplierFor(photo.roughLocation);
+
+  const floors = photo.suggestedFloors && photo.suggestedFloors > 0 ? photo.suggestedFloors : randInt(1, 3);
+  const sqftPerFloor = randInt(4000, 14000);
+  const sqft = Math.round((floors * sqftPerFloor) / 100) * 100;
+  const yearBuilt = randInt(1920, 2022);
+
+  // Same illustrative-only approach as residential, with a commercial
+  // per-sqft baseline instead (lower $/sqft than prime housing, but much
+  // larger footprints, so totals still land in a meaningfully different --
+  // and usually higher -- range than a house).
+  const ageFactor = yearBuilt > 2010 ? 1.08 : yearBuilt < 1960 ? 0.9 : 1.0;
+  const basePricePerSqft = randInt(90, 220);
+  let price = sqft * basePricePerSqft * mult * ageFactor;
+  price *= 0.9 + rand() * 0.2;
+  price = humanizePrice(price);
+
+  const streetNum = randInt(100, 9999);
+  const address = `${streetNum} ${pick(STREET_NAMES)} ${pick(STREET_TYPES)}`;
+
+  return {
+    id,
+    address,
+    city,
+    state,
+    homeType: buildingType,
+    category: 'commercial',
+    currency: currencyForLocation(photo.roughLocation),
+    price,
+    sqft,
+    beds: null,
+    baths: null,
+    floors,
     yearBuilt,
     image: photo.imageUrl,
     imageCredit: `${photo.attribution} — ${photo.license}, via Wikimedia Commons`,
@@ -173,10 +273,13 @@ function buildFamousListing(id, prop) {
     city: `${prop.streetAddress}, ${prop.city}`,
     state: prop.state,
     homeType: prop.homeType,
+    category: 'residential',
+    currency: 'USD', // all curated famous residential properties are US-located
     price: prop.price,
     sqft: prop.sqft,
     beds: prop.beds,
     baths: prop.baths,
+    floors: null,
     yearBuilt: prop.yearBuilt,
     image: prop.image,
     imageCredit: prop.imageCredit,
@@ -185,16 +288,44 @@ function buildFamousListing(id, prop) {
   };
 }
 
-const rawPhotos = require('./research/commons-house-photos.json');
-const famousProperties = require('./research/famous-properties.json');
+function buildFamousCommercialListing(id, prop) {
+  return {
+    id,
+    address: prop.name,
+    city: `${prop.streetAddress}, ${prop.city}`,
+    state: prop.state,
+    homeType: prop.buildingType,
+    category: 'commercial',
+    currency: 'USD', // all curated famous commercial properties are US-located
+    price: prop.price,
+    sqft: prop.sqft,
+    beds: null,
+    baths: null,
+    floors: prop.floors,
+    yearBuilt: prop.yearBuilt,
+    image: prop.image,
+    imageCredit: prop.imageCredit,
+    isFamous: true,
+    priceSource: prop.priceSource,
+  };
+}
 
-const dedupedPhotos = dedupePhotos(rawPhotos);
+const residentialPhotosBatch1 = require('./research/commons-house-photos.json');
+const residentialPhotosBatch2 = require('./research/commons-house-photos-batch2.json');
+const commercialPhotos = require('./research/commons-commercial-photos.json');
+const famousProperties = require('./research/famous-properties.json');
+const famousCommercialProperties = require('./research/famous-commercial-properties.json');
+
+const dedupedResidentialPhotos = dedupePhotos([...residentialPhotosBatch1, ...residentialPhotosBatch2]);
+const dedupedCommercialPhotos = dedupePhotos(commercialPhotos);
 
 let nextId = 1;
-const regularListings = dedupedPhotos.map((photo) => buildRegularListing(nextId++, photo));
+const residentialListings = dedupedResidentialPhotos.map((photo) => buildRegularListing(nextId++, photo));
+const commercialListings = dedupedCommercialPhotos.map((photo) => buildCommercialListing(nextId++, photo));
 const famousListings = famousProperties.map((prop) => buildFamousListing(nextId++, prop));
+const famousCommercialListings = famousCommercialProperties.map((prop) => buildFamousCommercialListing(nextId++, prop));
 
-const listings = [...regularListings, ...famousListings];
+const listings = [...residentialListings, ...commercialListings, ...famousListings, ...famousCommercialListings];
 
 fs.writeFileSync(
   path.join(__dirname, 'listings.json'),
@@ -203,5 +334,6 @@ fs.writeFileSync(
 
 console.log(
   `Generated ${listings.length} listings -> data/listings.json ` +
-    `(${rawPhotos.length} raw photos -> ${dedupedPhotos.length} unique regular + ${famousListings.length} famous)`
+    `(${dedupedResidentialPhotos.length} residential + ${dedupedCommercialPhotos.length} commercial + ` +
+    `${famousListings.length} famous residential + ${famousCommercialListings.length} famous commercial)`
 );

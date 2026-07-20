@@ -1,4 +1,4 @@
-// PriceGuessr client — drives the round loop: fetch a round, take a guess,
+// ValueGuessr client — drives the round loop: fetch a round, take a guess,
 // animate the reveal, and hand off to the results screen.
 //
 // v2 idea: the server already supports a seeded "daily" mode (same 5 houses
@@ -16,13 +16,43 @@
   var LANDMARK_RANGE = { min: 1000000, max: 500000000 };
   var SLIDER_STEPS = 1000;
 
-  var money0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-  var moneyShort = function (n) {
-    if (n >= 1000000000) return '$' + (n / 1000000000).toFixed(n % 1000000000 ? 1 : 0) + 'B';
-    if (n >= 1000000) return '$' + (n / 1000000).toFixed(n % 1000000 ? 1 : 0) + 'M';
-    if (n >= 1000) return '$' + Math.round(n / 1000) + 'K';
-    return '$' + n;
-  };
+  // All listing prices are stored/scored in USD server-side. The server
+  // tells each round which real-world currency to guess in -- a property's
+  // OWN country's currency (USA -> USD, UK -> GBP, etc; see lib/currencies.js
+  // for the full accurate table) -- and this client only ever converts for
+  // *display*: the slider itself always operates in USD internally, so
+  // scoring (percentage-error based) is unaffected regardless of currency.
+  var DEFAULT_CURRENCY = { code: 'USD', symbol: '$', name: 'US Dollar', flag: '\u{1F1FA}\u{1F1F8}', rate: 1 };
+
+  function displayPrecisionFor(amount) {
+    if (amount >= 100000000) return 1000000;
+    if (amount >= 10000000) return 100000;
+    if (amount >= 1000000) return 10000;
+    if (amount >= 10000) return 100;
+    if (amount >= 100) return 10;
+    return 1;
+  }
+
+  function toDisplay(usdAmount) {
+    var raw = usdAmount * state.currency.rate;
+    var precision = displayPrecisionFor(raw);
+    return Math.round(raw / precision) * precision;
+  }
+
+  function formatMoney(usdAmount) {
+    var amount = toDisplay(usdAmount);
+    return state.currency.symbol + amount.toLocaleString('en-US') + ' ' + state.currency.code;
+  }
+
+  function moneyShort(usdAmount) {
+    var n = toDisplay(usdAmount);
+    var sym = state.currency.symbol;
+    var code = state.currency.code;
+    if (n >= 1000000000) return sym + (n / 1000000000).toFixed(n % 1000000000 ? 1 : 0) + 'B ' + code;
+    if (n >= 1000000) return sym + (n / 1000000).toFixed(n % 1000000 ? 1 : 0) + 'M ' + code;
+    if (n >= 1000) return sym + Math.round(n / 1000) + 'K ' + code;
+    return sym + n + ' ' + code;
+  }
 
   var el = {}; // populated on DOMContentLoaded
   var state = {
@@ -34,18 +64,27 @@
     streak: 0,
     priceRange: STANDARD_RANGE,
     currentGuess: STANDARD_RANGE.min,
+    currency: DEFAULT_CURRENCY,
+    rollAvailable: true,
+    rolledThisRound: false,
+    inGame: false,
   };
 
   function $(id) { return document.getElementById(id); }
 
   function cacheEls() {
     [
+      'logoBtn', 'quitConfirmOverlay', 'btnCancelQuit', 'btnConfirmQuit',
+      'leaderboardSubmitOverlay', 'leaderboardNameInput', 'leaderboardSubmitError',
+      'btnSubmitName', 'btnSkipLeaderboard',
+      'btnViewLeaderboard', 'leaderboardViewOverlay', 'leaderboardSubtitle',
+      'leaderboardList', 'btnCloseLeaderboard', 'btnTabDaily', 'btnTabQuick',
       'liveCounter', 'btnQuickPlay', 'btnDailyPlay', 'prevBest', 'prevStreak', 'prevGames',
       'screen-start', 'screen-game', 'screen-results',
       'progressDots', 'hudScore', 'hudStreak',
       'propertyImage', 'roundBadge', 'propertyAddress', 'propertyLocation', 'famousBadge', 'propertyCredit',
-      'statSqft', 'statBeds', 'statBaths', 'statYear',
-      'guessSlider', 'guessAmount', 'btnSubmitGuess', 'guessCard', 'propertyCard',
+      'statSqft', 'statBeds', 'statBaths', 'statYear', 'pstatBedsIcon', 'pstatBedsLabel', 'pstatBaths',
+      'guessSlider', 'guessAmount', 'btnSubmitGuess', 'guessCard', 'propertyCard', 'currencyBadge', 'btnRollCurrency',
       'sliderMinLabel', 'sliderMaxLabel',
       'revealOverlay', 'revealEmoji', 'revealLabel', 'revealGuess', 'revealActual',
       'revealBarFill', 'revealBarMarker', 'revealError', 'revealPoints', 'revealSource', 'btnNextRound',
@@ -85,9 +124,47 @@
   function updateGuessDisplay() {
     var v = Number(el.guessSlider.value);
     state.currentGuess = sliderToPrice(v);
-    el.guessAmount.textContent = money0.format(state.currentGuess);
+    el.guessAmount.textContent = formatMoney(state.currentGuess);
     var pct = (v / SLIDER_STEPS) * 100;
     el.guessSlider.style.setProperty('--fill', pct + '%');
+  }
+
+  // --- Currency + Roll ----------------------------------------------------
+  // Every round is priced in the property's own real-world currency (its
+  // country's currency -- see lib/currencies.js). The one-per-game "Roll"
+  // swaps the CURRENT round's currency for a random one as a wildcard twist;
+  // scoring never changes since it's always computed in USD server-side.
+
+  function updateCurrencyBadge() {
+    el.currencyBadge.textContent = state.currency.flag + ' Guessing in ' + state.currency.code;
+    el.currencyBadge.classList.toggle('rolled', !!state.rolledThisRound);
+  }
+
+  function updateRollButton() {
+    el.btnRollCurrency.disabled = !state.rollAvailable;
+    el.btnRollCurrency.textContent = state.rollAvailable ? '\u{1F3B2} Roll Available' : '\u{1F3B2} Roll used';
+  }
+
+  function rollCurrency() {
+    if (!state.rollAvailable) return;
+    el.btnRollCurrency.disabled = true;
+    fetch('/api/game/roll', { method: 'POST' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.error) throw new Error(data.error);
+        state.currency = data.currency;
+        state.rollAvailable = false;
+        state.rolledThisRound = true;
+        updateCurrencyBadge();
+        updateRollButton();
+        // Re-render the guess amount + slider labels in the new currency.
+        updateGuessDisplay();
+        el.sliderMinLabel.textContent = moneyShort(state.priceRange.min);
+        el.sliderMaxLabel.textContent = moneyShort(state.priceRange.max);
+      })
+      .catch(function () {
+        updateRollButton();
+      });
   }
 
   // --- Rounds -----------------------------------------------------------
@@ -96,6 +173,11 @@
     state.roundNumber = round.roundNumber;
     state.totalRounds = round.totalRounds;
     state.priceRange = round.isFamous ? LANDMARK_RANGE : STANDARD_RANGE;
+    state.currency = round.currency || DEFAULT_CURRENCY;
+    state.rollAvailable = !!round.rollAvailable;
+    state.rolledThisRound = false;
+    updateCurrencyBadge();
+    updateRollButton();
 
     el.propertyImage.src = round.image;
     el.propertyImage.alt = 'Photo of ' + round.address;
@@ -103,9 +185,20 @@
     el.propertyAddress.textContent = round.address;
     el.propertyLocation.textContent = round.city + ', ' + round.state + ' · ' + round.homeType;
     el.statSqft.textContent = round.sqft.toLocaleString('en-US');
-    el.statBeds.textContent = round.beds;
-    el.statBaths.textContent = round.baths;
     el.statYear.textContent = round.yearBuilt;
+
+    if (round.category === 'commercial') {
+      el.pstatBedsIcon.textContent = '\u{1F3E2}'; // 🏢
+      el.statBeds.textContent = round.floors;
+      el.pstatBedsLabel.textContent = round.floors === 1 ? 'floor' : 'floors';
+      el.pstatBaths.hidden = true;
+    } else {
+      el.pstatBedsIcon.textContent = '\u{1F6CF}️'; // 🛏️
+      el.statBeds.textContent = round.beds;
+      el.pstatBedsLabel.textContent = 'bd';
+      el.pstatBaths.hidden = false;
+      el.statBaths.textContent = round.baths;
+    }
 
     el.famousBadge.hidden = !round.isFamous;
     el.propertyCredit.textContent = round.imageCredit ? 'Photo: ' + round.imageCredit : '';
@@ -155,6 +248,7 @@
         state.score = 0;
         state.streak = 0;
         state.totalRounds = data.totalRounds;
+        state.inGame = true;
         updateHud();
         showScreen('game');
         renderRound(Object.assign({ roundNumber: data.roundNumber, totalRounds: data.totalRounds }, data.round));
@@ -194,7 +288,7 @@
 
     el.revealEmoji.textContent = result.tierEmoji;
     el.revealLabel.textContent = result.tierLabel;
-    el.revealGuess.textContent = money0.format(result.guess);
+    el.revealGuess.textContent = formatMoney(result.guess);
     el.revealError.textContent = 'Off by ' + result.errorPct + '%';
     el.revealSource.textContent = result.priceSource || '';
     el.revealSource.hidden = !result.priceSource;
@@ -212,7 +306,7 @@
     el.revealOverlay.hidden = false;
 
     // Animate the actual-price counter + bar fill + points together.
-    animateCountUp(el.revealActual, 0, result.actual, 800, money0.format);
+    animateCountUp(el.revealActual, 0, result.actual, 800, formatMoney);
     animatePoints(result.points, 800);
     requestAnimationFrame(function () {
       el.revealBarFill.style.width = actualPct + '%';
@@ -282,6 +376,7 @@
   }
 
   function renderResults(data) {
+    state.inGame = false;
     showScreen('results');
     el.resultsEyebrow.textContent = data.mode === 'daily' ? 'Daily Challenge Complete' : 'Game Complete';
     el.resultsScoreMax.textContent = 'out of ' + data.maxScore.toLocaleString('en-US');
@@ -306,6 +401,93 @@
 
     if (window.PGStats) window.PGStats.recordGame(data);
     refreshStatsPreview();
+
+    if (data.isFirstGame) showLeaderboardPrompt();
+  }
+
+  // --- Leaderboard --------------------------------------------------------
+
+  function showLeaderboardPrompt() {
+    el.leaderboardNameInput.value = '';
+    el.leaderboardSubmitError.hidden = true;
+    el.leaderboardSubmitOverlay.hidden = false;
+  }
+
+  function submitLeaderboardName() {
+    var name = el.leaderboardNameInput.value.trim();
+    if (!name) {
+      el.leaderboardSubmitError.textContent = 'Please enter a name.';
+      el.leaderboardSubmitError.hidden = false;
+      return;
+    }
+    el.btnSubmitName.disabled = true;
+    fetch('/api/leaderboard/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        el.btnSubmitName.disabled = false;
+        if (data.error) throw new Error(data.error);
+        el.leaderboardSubmitOverlay.hidden = true;
+        openLeaderboard(state.mode === 'daily' ? 'daily' : 'quick');
+      })
+      .catch(function () {
+        el.btnSubmitName.disabled = false;
+        el.leaderboardSubmitError.textContent = 'Could not submit right now. Please try again.';
+        el.leaderboardSubmitError.hidden = false;
+      });
+  }
+
+  // Builds rows via DOM APIs (not innerHTML) so a leaderboard name can never
+  // be interpreted as markup -- these names come from other players.
+  function renderLeaderboardList(entries) {
+    el.leaderboardList.innerHTML = '';
+    if (!entries.length) {
+      var empty = document.createElement('li');
+      empty.className = 'leaderboard-empty';
+      empty.textContent = 'No scores yet — be the first!';
+      el.leaderboardList.appendChild(empty);
+      return;
+    }
+    var medals = ['\u{1F947}', '\u{1F948}', '\u{1F949}'];
+    entries.forEach(function (entry, i) {
+      var row = document.createElement('li');
+      row.className = 'leaderboard-row' + (i < 3 ? ' top-3' : '');
+
+      var rank = document.createElement('span');
+      rank.className = 'leaderboard-rank';
+      rank.textContent = i < 3 ? medals[i] : (i + 1) + '.';
+
+      var name = document.createElement('span');
+      name.className = 'leaderboard-name';
+      name.textContent = entry.name;
+
+      var score = document.createElement('span');
+      score.className = 'leaderboard-score';
+      score.textContent = entry.score.toLocaleString('en-US') + ' pts';
+
+      row.appendChild(rank);
+      row.appendChild(name);
+      row.appendChild(score);
+      el.leaderboardList.appendChild(row);
+    });
+  }
+
+  function loadLeaderboardTab(tab) {
+    el.btnTabDaily.classList.toggle('active', tab === 'daily');
+    el.btnTabQuick.classList.toggle('active', tab === 'quick');
+    el.leaderboardSubtitle.textContent = tab === 'daily' ? "Today's Daily Challenge" : 'Quick Play — All-Time';
+    fetch('/api/leaderboard?mode=' + tab)
+      .then(function (r) { return r.json(); })
+      .then(function (data) { renderLeaderboardList(data.entries); })
+      .catch(function () { renderLeaderboardList([]); });
+  }
+
+  function openLeaderboard(preferredTab) {
+    el.leaderboardViewOverlay.hidden = false;
+    loadLeaderboardTab(preferredTab || 'daily');
   }
 
   function flashToast() {
@@ -329,11 +511,11 @@
     var text = window.PGShareCard ? window.PGShareCard.buildText(shareData) : '';
     if (navigator.share) {
       window.PGShareCard.toBlob(el.shareCanvas).then(function (blob) {
-        var files = blob ? [new File([blob], 'priceguessr-result.png', { type: 'image/png' })] : [];
+        var files = blob ? [new File([blob], 'valueguessr-result.png', { type: 'image/png' })] : [];
         var canShareFiles = files.length && navigator.canShare && navigator.canShare({ files: files });
         var payload = canShareFiles
-          ? { text: text, files: files, title: 'PriceGuessr' }
-          : { text: text, title: 'PriceGuessr' };
+          ? { text: text, files: files, title: 'ValueGuessr' }
+          : { text: text, title: 'ValueGuessr' };
         navigator.share(payload).catch(function () { /* user cancelled share sheet */ });
       });
     } else {
@@ -402,19 +584,56 @@
 
   // --- Wire up --------------------------------------------------------------
 
+  function goHome() {
+    state.inGame = false;
+    refreshStatsPreview();
+    showScreen('start');
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     cacheEls();
     refreshStatsPreview();
 
     el.guessSlider.addEventListener('input', updateGuessDisplay);
     el.btnSubmitGuess.addEventListener('click', submitGuess);
+    el.btnRollCurrency.addEventListener('click', rollCurrency);
     el.btnQuickPlay.addEventListener('click', function () { startGame('quick'); });
     el.btnDailyPlay.addEventListener('click', function () { startGame('daily'); });
     el.btnPlayAgain.addEventListener('click', function () { startGame(state.mode); });
-    el.btnBackHome.addEventListener('click', function () {
-      refreshStatsPreview();
-      showScreen('start');
+    el.btnBackHome.addEventListener('click', goHome);
+
+    el.logoBtn.addEventListener('click', function () {
+      if (state.inGame) {
+        el.quitConfirmOverlay.hidden = false;
+      } else {
+        goHome();
+      }
     });
+    el.btnCancelQuit.addEventListener('click', function () {
+      el.quitConfirmOverlay.hidden = true;
+    });
+    el.btnConfirmQuit.addEventListener('click', function () {
+      el.quitConfirmOverlay.hidden = true;
+      el.revealOverlay.hidden = true;
+      goHome();
+    });
+
+    el.btnSubmitName.addEventListener('click', submitLeaderboardName);
+    el.btnSkipLeaderboard.addEventListener('click', function () {
+      el.leaderboardSubmitOverlay.hidden = true;
+    });
+    el.leaderboardNameInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') submitLeaderboardName();
+    });
+
+    el.btnViewLeaderboard.addEventListener('click', function () {
+      openLeaderboard(state.mode === 'daily' ? 'daily' : 'quick');
+    });
+    el.btnCloseLeaderboard.addEventListener('click', function () {
+      el.leaderboardViewOverlay.hidden = true;
+    });
+    el.btnTabDaily.addEventListener('click', function () { loadLeaderboardTab('daily'); });
+    el.btnTabQuick.addEventListener('click', function () { loadLeaderboardTab('quick'); });
 
     window.addEventListener('resize', function () {
       var canvas = $('confettiCanvas');

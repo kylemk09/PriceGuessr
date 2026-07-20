@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'priceguessr:stats:v1';
+  var STORAGE_KEY = 'valueguessr:stats:v1';
 
   function load() {
     try {

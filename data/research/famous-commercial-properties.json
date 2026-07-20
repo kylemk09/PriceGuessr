@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Willis Tower",
+    "streetAddress": "233 S Wacker Dr",
+    "city": "Chicago",
+    "state": "IL",
+    "buildingType": "Office Tower",
+    "price": 1300000000,
+    "sqft": 4560000,
+    "floors": 108,
+    "yearBuilt": 1973,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Sears_Tower_from_the_Chicago_River%2C_Chicago%2C_IL.jpg/1280px-Sears_Tower_from_the_Chicago_River%2C_Chicago%2C_IL.jpg",
+    "imageCredit": "w_lemay — CC0, via Wikimedia Commons",
+    "priceSource": "Sold March 2015 to Blackstone for $1.3B — the highest price ever paid for a single U.S. office building outside New York City at the time (CNN, Fortune)."
+  },
+  {
+    "name": "General Motors Building",
+    "streetAddress": "767 Fifth Ave",
+    "city": "New York",
+    "state": "NY",
+    "buildingType": "Office Tower",
+    "price": 2800000000,
+    "sqft": 2000000,
+    "floors": 50,
+    "yearBuilt": 1968,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/59th_St_5th_Av_td_%282018-08-27%29_11_-_General_Motors_Building.jpg/1280px-59th_St_5th_Av_td_%282018-08-27%29_11_-_General_Motors_Building.jpg",
+    "imageCredit": "Tdorante10 — CC BY-SA 4.0",
+    "priceSource": "Bought by Boston Properties (with Goldman Sachs and Meraas Capital) for $2.8B in June 2008 — one of the largest single-office-tower sales in U.S. history (SEC filings, Property Funds World)."
+  },
+  {
+    "name": "Waldorf Astoria New York",
+    "streetAddress": "301 Park Ave",
+    "city": "New York",
+    "state": "NY",
+    "buildingType": "Hotel",
+    "price": 1950000000,
+    "sqft": 1600000,
+    "floors": 47,
+    "yearBuilt": 1931,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Waldorf_Astoria_exterior.jpg/1280px-Waldorf_Astoria_exterior.jpg",
+    "imageCredit": "Alan Light — CC BY 2.0",
+    "priceSource": "Sold by Hilton to China's Anbang Insurance Group for $1.95B in October 2014 — the most expensive hotel sale in U.S. history at the time (CNBC, Hilton)."
+  },
+  {
+    "name": "Chrysler Building",
+    "streetAddress": "405 Lexington Ave",
+    "city": "New York",
+    "state": "NY",
+    "buildingType": "Office Tower",
+    "price": 150000000,
+    "sqft": 1200000,
+    "floors": 77,
+    "yearBuilt": 1930,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/84/Chrysler_Building_2011.jpg",
+    "imageCredit": "Valfex — CC BY-SA 4.0",
+    "priceSource": "Sold in March 2019 to Austrian developer Signa Holding and RFR Holding for $150M — a steep discount from its $800M sale in 2008 (6sqft, GlobeSt)."
+  }
+]

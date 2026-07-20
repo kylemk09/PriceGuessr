@@ -1,7 +1,7 @@
 {
-  "name": "priceguessr",
+  "name": "valueguessr",
   "version": "1.0.0",
-  "description": "PriceGuessr (aka HomeGuessr) - a fast-paced, Wordle-style real estate valuation guessing game.",
+  "description": "ValueGuessr - a fast-paced, Wordle-style real estate valuation guessing game.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

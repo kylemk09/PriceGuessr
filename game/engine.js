@@ -4,6 +4,7 @@
 
 const { listings, getListingById } = require('../data/listingsStore');
 const { mulberry32, hashString } = require('../lib/prng');
+const { getCurrency, randomCurrencyCode } = require('../lib/currencies');
 
 const ROUNDS_PER_GAME = 5;
 const MAX_POINTS_PER_ROUND = 1000;
@@ -48,10 +49,10 @@ function pickListingIds(mode) {
   const allIds = listings.map((l) => l.id);
   if (mode === 'daily') {
     // v2 idea: incorporate a stable puzzle number (days since launch) into
-    // the share text ("PriceGuessr #47") instead of the raw date -- see
+    // the share text ("ValueGuessr #47") instead of the raw date -- see
     // views/index.ejs for where that display number would slot in.
     const key = todayKey();
-    const rng = mulberry32(hashString(`priceguessr-${key}`));
+    const rng = mulberry32(hashString(`valueguessr-${key}`));
     return { ids: shuffled(allIds, rng).slice(0, ROUNDS_PER_GAME), dailyKey: key };
   }
   const rng = Math.random;
@@ -71,11 +72,14 @@ function startNewGame(session, mode) {
     streak: 0,
     bestStreak: 0,
     roundResults: [],
+    rollUsed: false,
   };
   return session.game;
 }
 
 // Strips the price out of a listing so the client never sees the answer.
+// `currency` is the property's own real-world currency (see lib/currencies)
+// -- players guess in whatever currency the listing is actually priced in.
 function getPublicRound(game, index) {
   const listing = getListingById(game.listingIds[index]);
   return {
@@ -85,17 +89,41 @@ function getPublicRound(game, index) {
     city: listing.city,
     state: listing.state,
     homeType: listing.homeType,
+    category: listing.category || 'residential',
     sqft: listing.sqft,
     beds: listing.beds,
     baths: listing.baths,
+    floors: listing.floors || null,
     yearBuilt: listing.yearBuilt,
     image: listing.image,
     imageCredit: listing.imageCredit || null,
     isFamous: !!listing.isFamous,
+    currency: getCurrency(listing.currency),
+    rollAvailable: !game.rollUsed,
     // NOTE: priceSource is withheld here (it usually names the actual sale
     // price in prose, e.g. "Sold 2016 for $100M") -- it's only revealed in
     // the guess result below, alongside the real price.
   };
+}
+
+// The one-per-game "Roll": swaps the CURRENT round's guessing currency for a
+// random one (possibly unrelated to the property's real country) -- a fun
+// wildcard, not a correction. Scoring is untouched either way since it's
+// always computed in USD; this only affects what currency the player enters
+// their guess in for this one round.
+function useRoll(session) {
+  const game = session.game;
+  if (!game) return { error: 'No active game. Start a new one.' };
+  if (game.currentIndex >= game.listingIds.length) {
+    return { error: 'Game already finished.' };
+  }
+  if (game.rollUsed) {
+    return { error: 'Roll already used this game.' };
+  }
+  const listing = getListingById(game.listingIds[game.currentIndex]);
+  game.rollUsed = true;
+  const code = randomCurrencyCode(listing.currency);
+  return { currency: getCurrency(code) };
 }
 
 function submitGuess(session, guess) {
@@ -136,6 +164,9 @@ function submitGuess(session, guess) {
 
   game.currentIndex += 1;
   const isLastRound = game.currentIndex >= game.listingIds.length;
+  if (isLastRound) {
+    session.gamesCompleted = (session.gamesCompleted || 0) + 1;
+  }
 
   return {
     actual,
@@ -153,6 +184,7 @@ function submitGuess(session, guess) {
     roundNumber: game.currentIndex,
     totalRounds: ROUNDS_PER_GAME,
     isLastRound,
+    isFirstGame: isLastRound ? session.gamesCompleted === 1 : undefined,
     nextRound: isLastRound ? null : getPublicRound(game, game.currentIndex),
   };
 }
@@ -170,14 +202,17 @@ function getResults(session) {
     maxScore: ROUNDS_PER_GAME * MAX_POINTS_PER_ROUND,
     bestStreak: game.bestStreak,
     roundResults: game.roundResults,
+    isFirstGame: session.gamesCompleted === 1,
   };
 }
 
 module.exports = {
   ROUNDS_PER_GAME,
   MAX_POINTS_PER_ROUND,
+  todayKey,
   startNewGame,
   submitGuess,
   getPublicRound,
   getResults,
+  useRoll,
 };

@@ -1,4 +1,4 @@
-// PriceGuessr (aka HomeGuessr) -- Express server.
+// ValueGuessr -- Express server.
 //
 // Game state (score/streak/current round) lives in the express-session
 // (in-memory store), keyed per-browser via a cookie. There is no database in
@@ -13,11 +13,14 @@ const session = require('express-session');
 const { listings } = require('./data/listingsStore');
 const {
   ROUNDS_PER_GAME,
+  todayKey,
   startNewGame,
   submitGuess,
   getPublicRound,
   getResults,
+  useRoll,
 } = require('./game/engine');
+const { submitScore, getTop } = require('./game/leaderboard');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,7 +35,7 @@ app.use(
   session({
     // Dev-only secret. Replace with an env var (process.env.SESSION_SECRET)
     // before deploying anywhere real.
-    secret: 'priceguessr-dev-secret-change-me',
+    secret: 'valueguessr-dev-secret-change-me',
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 6 }, // 6 hours
@@ -78,6 +81,18 @@ app.post('/api/game/guess', (req, res) => {
   res.json(result);
 });
 
+// Use the game's one-per-game "Roll": swaps the current round's guessing
+// currency for a random one. Server-authoritative (once-per-game enforced
+// here, not trusted from the client) and the random pick itself happens
+// server-side too.
+app.post('/api/game/roll', (req, res) => {
+  const result = useRoll(req.session);
+  if (result.error) {
+    return res.status(400).json(result);
+  }
+  res.json(result);
+});
+
 // Fetch the final summary for the results screen (also used on refresh).
 app.get('/api/game/results', (req, res) => {
   const results = getResults(req.session);
@@ -87,6 +102,40 @@ app.get('/api/game/results', (req, res) => {
   res.json(results);
 });
 
+// ---- Leaderboard --------------------------------------------------------
+
+// Submit the CURRENT session's just-finished game to the leaderboard. The
+// score is read from the session (set by the server during play), never
+// trusted from the client request body -- so a player can't just POST an
+// arbitrary high score.
+app.post('/api/leaderboard/submit', (req, res) => {
+  const game = req.session.game;
+  if (!game || game.currentIndex < game.listingIds.length) {
+    return res.status(400).json({ error: 'No completed game to submit.' });
+  }
+  const name = req.body && req.body.name;
+  if (!name || !String(name).trim()) {
+    return res.status(400).json({ error: 'Name is required.' });
+  }
+
+  const entry = submitScore({
+    mode: game.mode,
+    dailyKey: game.dailyKey,
+    name,
+    score: game.score,
+    streak: game.bestStreak,
+  });
+  res.json({ ok: true, entry, top: getTop(game.mode, game.dailyKey) });
+});
+
+// Fetch a leaderboard. mode=daily uses `date` (defaults to today) as the key;
+// mode=quick is a single all-time board.
+app.get('/api/leaderboard', (req, res) => {
+  const mode = req.query.mode === 'daily' ? 'daily' : 'quick';
+  const dailyKey = typeof req.query.date === 'string' ? req.query.date : todayKey();
+  res.json({ mode, dailyKey, entries: getTop(mode, dailyKey) });
+});
+
 app.listen(PORT, () => {
-  console.log(`PriceGuessr running at http://localhost:${PORT}`);
+  console.log(`ValueGuessr running at http://localhost:${PORT}`);
 });
