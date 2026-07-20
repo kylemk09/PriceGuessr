@@ -33,9 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
   session({
-    // Dev-only secret. Replace with an env var (process.env.SESSION_SECRET)
-    // before deploying anywhere real.
-    secret: 'valueguessr-dev-secret-change-me',
+    // Falls back to a dev-only placeholder locally; set a real SESSION_SECRET
+    // env var wherever this is actually deployed.
+    secret: process.env.SESSION_SECRET || 'valueguessr-dev-secret-change-me',
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 6 }, // 6 hours
