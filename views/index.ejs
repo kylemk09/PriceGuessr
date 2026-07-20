@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>PriceGuessr — Guess the Price, Keep the Streak</title>
+  <meta name="description" content="A fast-paced, Wordle-style real estate price guessing game." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="bg-grain" aria-hidden="true"></div>
+
+  <div class="app">
+    <!-- Top bar: brand + live player counter -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">🏠</span>
+        <span class="brand-name">Price<span class="accent">Guessr</span></span>
+      </div>
+      <div class="live-counter" id="liveCounter" title="Players active right now">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span id="liveCount">12,847</span> playing now
+      </div>
+    </header>
+
+    <!-- Activity ticker -->
+    <div class="ticker-wrap" aria-hidden="true">
+      <div class="ticker" id="ticker">
+        <!-- populated by ticker.js, duplicated for seamless loop -->
+      </div>
+    </div>
+
+    <main class="stage">
+      <!-- ============ START SCREEN ============ -->
+      <section class="screen" id="screen-start" data-screen="start">
+        <div class="glass card start-card">
+          <h1 class="hero-title">How well do you know<br /><span class="accent">home prices?</span></h1>
+          <p class="hero-sub">5 real-looking listings. No price shown. Guess as close as you can.</p>
+
+          <div class="social-proof">
+            <span class="social-proof-emoji">🔥</span>
+            Join <strong>500K+</strong> players guessing home prices
+          </div>
+
+          <div class="stats-preview" id="statsPreview">
+            <div class="stat-chip">
+              <span class="stat-chip-value" id="prevBest">—</span>
+              <span class="stat-chip-label">Best score</span>
+            </div>
+            <div class="stat-chip">
+              <span class="stat-chip-value" id="prevStreak">—</span>
+              <span class="stat-chip-label">Best streak</span>
+            </div>
+            <div class="stat-chip">
+              <span class="stat-chip-value" id="prevGames">—</span>
+              <span class="stat-chip-label">Games played</span>
+            </div>
+          </div>
+
+          <div class="start-actions">
+            <button class="btn btn-primary btn-lg" id="btnQuickPlay">
+              ▶ Quick Play
+            </button>
+            <button class="btn btn-ghost btn-lg" id="btnDailyPlay">
+              📅 Daily Challenge
+            </button>
+          </div>
+          <p class="daily-hint">Daily Challenge gives everyone the same 5 houses today — compare scores with friends.</p>
+        </div>
+      </section>
+
+      <!-- ============ GAME SCREEN ============ -->
+      <section class="screen" id="screen-game" data-screen="game" hidden>
+        <div class="game-hud">
+          <div class="progress-dots" id="progressDots" aria-hidden="true"></div>
+          <div class="hud-right">
+            <div class="hud-metric">
+              <span class="hud-label">Score</span>
+              <span class="hud-value accent" id="hudScore">0</span>
+            </div>
+            <div class="hud-metric">
+              <span class="hud-label">Streak</span>
+              <span class="hud-value" id="hudStreak">0 🔥</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass card property-card" id="propertyCard">
+          <div class="property-image-wrap">
+            <img class="property-image" id="propertyImage" src="" alt="Property photo" />
+            <span class="property-round-badge" id="roundBadge">Round 1/5</span>
+            <span class="famous-badge" id="famousBadge" hidden>🏛 Notable Property</span>
+          </div>
+          <div class="property-info">
+            <h2 class="property-address" id="propertyAddress">—</h2>
+            <p class="property-location" id="propertyLocation">—</p>
+            <div class="property-stats">
+              <div class="pstat"><span class="pstat-icon">📐</span><span id="statSqft">—</span> sqft</div>
+              <div class="pstat"><span class="pstat-icon">🛏️</span><span id="statBeds">—</span> bd</div>
+              <div class="pstat"><span class="pstat-icon">🛁</span><span id="statBaths">—</span> ba</div>
+              <div class="pstat"><span class="pstat-icon">🏗️</span>Built <span id="statYear">—</span></div>
+            </div>
+            <p class="property-credit" id="propertyCredit" hidden></p>
+          </div>
+        </div>
+
+        <div class="glass card guess-card" id="guessCard">
+          <div class="guess-display">
+            <span class="guess-label">Your guess</span>
+            <span class="guess-amount" id="guessAmount">$300,000</span>
+          </div>
+          <input type="range" id="guessSlider" class="guess-slider" min="0" max="1000" step="1" value="500" />
+          <div class="slider-scale"><span id="sliderMinLabel">$20K</span><span id="sliderMaxLabel">$3M</span></div>
+          <button class="btn btn-primary btn-lg btn-submit" id="btnSubmitGuess">Lock In Guess</button>
+        </div>
+
+        <!-- Reveal overlay -->
+        <div class="reveal-overlay" id="revealOverlay" hidden>
+          <div class="glass card reveal-card">
+            <div class="reveal-tier" id="revealTier">
+              <span class="reveal-emoji" id="revealEmoji">🎯</span>
+              <span class="reveal-label" id="revealLabel">Nailed it!</span>
+            </div>
+
+            <div class="reveal-numbers">
+              <div class="reveal-col">
+                <span class="reveal-col-label">Your guess</span>
+                <span class="reveal-col-value" id="revealGuess">$0</span>
+              </div>
+              <div class="reveal-col">
+                <span class="reveal-col-label">Actual price</span>
+                <span class="reveal-col-value accent" id="revealActual">$0</span>
+              </div>
+            </div>
+
+            <div class="reveal-bar-track">
+              <div class="reveal-bar-fill" id="revealBarFill"></div>
+              <div class="reveal-bar-marker" id="revealBarMarker"></div>
+            </div>
+            <p class="reveal-error" id="revealError">Off by 0%</p>
+
+            <div class="reveal-points" id="revealPoints">+0 pts</div>
+            <p class="reveal-source" id="revealSource" hidden></p>
+
+            <button class="btn btn-primary btn-lg" id="btnNextRound">Next Round →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ RESULTS SCREEN ============ -->
+      <section class="screen" id="screen-results" data-screen="results" hidden>
+        <div class="glass card results-card" id="resultsCard">
+          <p class="results-eyebrow" id="resultsEyebrow">Game Complete</p>
+          <h1 class="results-score" id="resultsScore">0</h1>
+          <p class="results-score-max" id="resultsScoreMax">out of 5,000</p>
+
+          <div class="results-emoji-row" id="resultsEmojiRow"></div>
+
+          <div class="results-metrics">
+            <div class="stat-chip">
+              <span class="stat-chip-value" id="resultsStreak">0</span>
+              <span class="stat-chip-label">Best streak</span>
+            </div>
+            <div class="stat-chip">
+              <span class="stat-chip-value" id="resultsRank">—</span>
+              <span class="stat-chip-label">Grade</span>
+            </div>
+          </div>
+
+          <canvas id="shareCanvas" width="600" height="720" class="share-canvas-preview"></canvas>
+
+          <div class="results-actions">
+            <button class="btn btn-primary btn-lg" id="btnCopyResult">📋 Copy Result</button>
+            <button class="btn btn-ghost btn-lg" id="btnShareResult">📤 Share</button>
+          </div>
+          <div class="results-actions results-actions-secondary">
+            <button class="btn btn-outline" id="btnPlayAgain">Play Again</button>
+            <button class="btn btn-outline" id="btnBackHome">Home</button>
+          </div>
+          <p class="copy-toast" id="copyToast" hidden>Copied to clipboard!</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        🏠 PriceGuessr — property photos are real, freely-licensed photographs (credited under
+        each photo where required). For regular houses, the address and price shown are
+        <strong>illustrative</strong> — modeled on real market data, not the verified sale price of
+        that exact home. Properties marked "🏛 Notable Property" are real, publicly documented
+        buildings with a publicly reported price or valuation and a source note shown after you
+        guess. Nothing here is real-time property valuation or financial advice.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Sound effects: drop free/CC0 .mp3 files into public/sounds/ named
+       submit.mp3 and reveal.mp3 to enable. Missing files fail silently. -->
+  <audio id="sfxSubmit" src="/sounds/submit.mp3" preload="none"></audio>
+  <audio id="sfxReveal" src="/sounds/reveal.mp3" preload="none"></audio>
+
+  <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+  <script>
+    window.__PRICEGUESSR__ = {
+      totalListings: <%= totalListings %>,
+      roundsPerGame: <%= roundsPerGame %>,
+    };
+  </script>
+  <script src="/js/ticker.js" defer></script>
+  <script src="/js/stats.js" defer></script>
+  <script src="/js/sharecard.js" defer></script>
+  <script src="/js/game.js" defer></script>
+</body>
+</html>
