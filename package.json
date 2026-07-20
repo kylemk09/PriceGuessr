@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "build": "echo \"No build step needed -- ValueGuessr is a plain Node.js/Express server, not a static/compiled app.\"",
     "generate-listings": "node data/generate-listings.js"
   },
   "dependencies": {
