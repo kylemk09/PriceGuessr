@@ -5,6 +5,7 @@
 const { listings, getListingById } = require('../data/listingsStore');
 const { mulberry32, hashString } = require('../lib/prng');
 const { getCurrency, randomCurrencyCode } = require('../lib/currencies');
+const { incrementGamesPlayed } = require('./playCounter');
 
 const ROUNDS_PER_GAME = 5;
 const MAX_POINTS_PER_ROUND = 1000;
@@ -166,6 +167,7 @@ function submitGuess(session, guess) {
   const isLastRound = game.currentIndex >= game.listingIds.length;
   if (isLastRound) {
     session.gamesCompleted = (session.gamesCompleted || 0) + 1;
+    incrementGamesPlayed();
   }
 
   return {

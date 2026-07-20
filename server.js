@@ -21,6 +21,7 @@ const {
   useRoll,
 } = require('./game/engine');
 const { submitScore, getTop } = require('./game/leaderboard');
+const { getGamesPlayedCount } = require('./game/playCounter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -134,6 +135,20 @@ app.get('/api/leaderboard', (req, res) => {
   const mode = req.query.mode === 'daily' ? 'daily' : 'quick';
   const dailyKey = typeof req.query.date === 'string' ? req.query.date : todayKey();
   res.json({ mode, dailyKey, entries: getTop(mode, dailyKey) });
+});
+
+// ---- Private stats (not linked from the UI anywhere) ---------------------
+
+// Total completed games, for the site owner's own reference only. Requires
+// a secret key (ADMIN_SECRET env var) as a query param; wrong/missing key
+// gets a plain 404 rather than 401/403, so the route doesn't announce its
+// own existence to anyone probing the site.
+app.get('/api/internal/stats', (req, res) => {
+  const expected = process.env.ADMIN_SECRET || 'valueguessr-dev-admin-secret-change-me';
+  if (req.query.key !== expected) {
+    return res.status(404).end();
+  }
+  res.json({ totalGamesPlayed: getGamesPlayedCount() });
 });
 
 app.listen(PORT, () => {
