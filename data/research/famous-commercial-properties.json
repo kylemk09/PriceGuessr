@@ -54,5 +54,20 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/8/84/Chrysler_Building_2011.jpg",
     "imageCredit": "Valfex — CC BY-SA 4.0",
     "priceSource": "Sold in March 2019 to Austrian developer Signa Holding and RFR Holding for $150M — a steep discount from its $800M sale in 2008 (6sqft, GlobeSt)."
+  },
+  {
+    "name": "8 Canada Square (HSBC Tower)",
+    "streetAddress": "8 Canada Square",
+    "city": "London",
+    "state": "England",
+    "buildingType": "Office Tower",
+    "currency": "GBP",
+    "price": 1100000000,
+    "sqft": 1100000,
+    "floors": 45,
+    "yearBuilt": 2002,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/8_Canada_Square.jpg/1280px-8_Canada_Square.jpg",
+    "imageCredit": "Willantvinnegar — CC BY-SA 4.0",
+    "priceSource": "Sold by Korea's National Pension Service to Qatar Investment Authority in December 2014 for over £1.1B — HSBC's former Canary Wharf global HQ (Real Assets, CityAM)."
   }
 ]

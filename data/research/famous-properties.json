@@ -88,5 +88,37 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Fallingwater%2C_the_classic_view.jpg/1280px-Fallingwater%2C_the_classic_view.jpg",
     "imageCredit": "AaronBarlow — CC BY-SA 4.0",
     "priceSource": "Estimated current worth ~$2.7M — owned by the Western Pennsylvania Conservancy and operated as a museum, not for sale."
+  },
+  {
+    "name": "432 Park Avenue Penthouse",
+    "streetAddress": "432 Park Avenue, 96th Floor",
+    "city": "New York",
+    "state": "NY",
+    "homeType": "Penthouse",
+    "currency": "USD",
+    "price": 180000000,
+    "sqft": 8255,
+    "beds": 6,
+    "baths": 9,
+    "yearBuilt": 2015,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/432_Park_Ave_New_York_NY%2C_2017.jpg/1280px-432_Park_Ave_New_York_NY%2C_2017.jpg",
+    "imageCredit": "PeterSesar — CC BY-SA 4.0",
+    "priceSource": "Sold February 2023 for $180M, occupying the entire 96th floor — one of the highest residential sale prices in U.S. history (CityRealty, 6sqft)."
+  },
+  {
+    "name": "One Hyde Park Penthouse",
+    "streetAddress": "100 Knightsbridge",
+    "city": "London",
+    "state": "England",
+    "homeType": "Penthouse",
+    "currency": "GBP",
+    "price": 140000000,
+    "sqft": 16000,
+    "beds": 6,
+    "baths": 6,
+    "yearBuilt": 2011,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/No_1_Hyde_Park%2C_London.jpg/1280px-No_1_Hyde_Park%2C_London.jpg",
+    "imageCredit": "Rob Deutscher — CC BY 2.0",
+    "priceSource": "Sold in 2010 for £140M to an undisclosed Eastern European buyer — a British property sale record at the time (Reuters, NBC News)."
   }
 ]

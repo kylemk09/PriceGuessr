@@ -131,6 +131,17 @@ const COUNTRY_FALLBACK_CITIES = {
   germany: [['Berlin', 'Germany'], ['Munich', 'Germany'], ['Hamburg', 'Germany']],
   poland: [['Warsaw', 'Poland'], ['Krakow', 'Poland']],
   sweden: [['Stockholm', 'Sweden'], ['Gothenburg', 'Sweden']],
+  france: [['Paris', 'France'], ['Lyon', 'France'], ['Marseille', 'France']],
+  netherlands: [['Amsterdam', 'Netherlands'], ['Rotterdam', 'Netherlands'], ['Utrecht', 'Netherlands']],
+  italy: [['Rome', 'Italy'], ['Milan', 'Italy'], ['Florence', 'Italy']],
+  japan: [['Tokyo', 'Japan'], ['Osaka', 'Japan'], ['Kyoto', 'Japan']],
+  spain: [['Madrid', 'Spain'], ['Barcelona', 'Spain'], ['Valencia', 'Spain']],
+  norway: [['Oslo', 'Norway'], ['Bergen', 'Norway']],
+  portugal: [['Lisbon', 'Portugal'], ['Porto', 'Portugal']],
+  switzerland: [['Zurich', 'Switzerland'], ['Geneva', 'Switzerland']],
+  brazil: [['São Paulo', 'Brazil'], ['Rio de Janeiro', 'Brazil']],
+  india: [['Mumbai', 'India'], ['Delhi', 'India'], ['Bangalore', 'India']],
+  'south africa': [['Cape Town', 'South Africa'], ['Johannesburg', 'South Africa']],
 };
 const COUNTRY_ONLY_NAMES = new Set([
   'usa', 'united states', 'u.s. virgin islands',
@@ -167,8 +178,22 @@ function parseLocation(roughLocation) {
   }
   if (parts.length >= 2) {
     const last = parts[parts.length - 1];
-    const state = last.toUpperCase() === 'USA' ? parts[parts.length - 2] || '' : last;
-    return { city: parts[0], state };
+    if (last.toUpperCase() === 'USA') {
+      if (parts.length >= 3) {
+        // "City, State, USA" -- proper 3+ part US address.
+        return { city: parts[0], state: parts[parts.length - 2] };
+      }
+      // "X, USA" where X isn't a recognized full state name (that's handled
+      // above) -- X is an ambiguous region/descriptor (e.g. "Southern
+      // California"), not a usable city+state pair by itself. Falling back
+      // to parts[0] for both would show the same value as city AND state;
+      // use a random real city instead.
+      const [fallbackCity, fallbackState] = pick(CITIES);
+      return { city: fallbackCity, state: fallbackState };
+    }
+    // International "City, Country" (or "City, Region, Country" -- we only
+    // need city + country here).
+    return { city: parts[0], state: last };
   }
   if (parts.length === 1 && COUNTRY_ONLY_NAMES.has(parts[0].toLowerCase())) {
     const countryPool = COUNTRY_FALLBACK_CITIES[parts[0].toLowerCase()];
@@ -274,7 +299,7 @@ function buildFamousListing(id, prop) {
     state: prop.state,
     homeType: prop.homeType,
     category: 'residential',
-    currency: 'USD', // all curated famous residential properties are US-located
+    currency: prop.currency || 'USD', // explicit per-property; defaults to USD for older entries that predate international famous properties
     price: prop.price,
     sqft: prop.sqft,
     beds: prop.beds,
@@ -296,7 +321,7 @@ function buildFamousCommercialListing(id, prop) {
     state: prop.state,
     homeType: prop.buildingType,
     category: 'commercial',
-    currency: 'USD', // all curated famous commercial properties are US-located
+    currency: prop.currency || 'USD', // explicit per-property; defaults to USD for older entries that predate international famous properties
     price: prop.price,
     sqft: prop.sqft,
     beds: null,
@@ -312,12 +337,14 @@ function buildFamousCommercialListing(id, prop) {
 
 const residentialPhotosBatch1 = require('./research/commons-house-photos.json');
 const residentialPhotosBatch2 = require('./research/commons-house-photos-batch2.json');
-const commercialPhotos = require('./research/commons-commercial-photos.json');
+const residentialPhotosBatch3 = require('./research/commons-house-photos-batch3.json');
+const commercialPhotosBatch1 = require('./research/commons-commercial-photos.json');
+const commercialPhotosBatch2 = require('./research/commons-commercial-photos-batch2.json');
 const famousProperties = require('./research/famous-properties.json');
 const famousCommercialProperties = require('./research/famous-commercial-properties.json');
 
-const dedupedResidentialPhotos = dedupePhotos([...residentialPhotosBatch1, ...residentialPhotosBatch2]);
-const dedupedCommercialPhotos = dedupePhotos(commercialPhotos);
+const dedupedResidentialPhotos = dedupePhotos([...residentialPhotosBatch1, ...residentialPhotosBatch2, ...residentialPhotosBatch3]);
+const dedupedCommercialPhotos = dedupePhotos([...commercialPhotosBatch1, ...commercialPhotosBatch2]);
 
 let nextId = 1;
 const residentialListings = dedupedResidentialPhotos.map((photo) => buildRegularListing(nextId++, photo));
