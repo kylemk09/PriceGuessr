@@ -167,7 +167,9 @@ function submitGuess(session, guess) {
   const isLastRound = game.currentIndex >= game.listingIds.length;
   if (isLastRound) {
     session.gamesCompleted = (session.gamesCompleted || 0) + 1;
-    incrementGamesPlayed();
+    // Fire-and-forget: this is a private analytics counter, not something
+    // the response should ever wait on or fail because of.
+    incrementGamesPlayed().catch((err) => console.error('incrementGamesPlayed failed:', err));
   }
 
   return {

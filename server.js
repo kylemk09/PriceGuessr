@@ -22,6 +22,7 @@ const {
 } = require('./game/engine');
 const { submitScore, getTop } = require('./game/leaderboard');
 const { getGamesPlayedCount } = require('./game/playCounter');
+const { initSchema } = require('./lib/db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -109,7 +110,7 @@ app.get('/api/game/results', (req, res) => {
 // score is read from the session (set by the server during play), never
 // trusted from the client request body -- so a player can't just POST an
 // arbitrary high score.
-app.post('/api/leaderboard/submit', (req, res) => {
+app.post('/api/leaderboard/submit', async (req, res) => {
   const game = req.session.game;
   if (!game || game.currentIndex < game.listingIds.length) {
     return res.status(400).json({ error: 'No completed game to submit.' });
@@ -119,22 +120,34 @@ app.post('/api/leaderboard/submit', (req, res) => {
     return res.status(400).json({ error: 'Name is required.' });
   }
 
-  const entry = submitScore({
-    mode: game.mode,
-    dailyKey: game.dailyKey,
-    name,
-    score: game.score,
-    streak: game.bestStreak,
-  });
-  res.json({ ok: true, entry, top: getTop(game.mode, game.dailyKey) });
+  try {
+    const entry = await submitScore({
+      mode: game.mode,
+      dailyKey: game.dailyKey,
+      name,
+      score: game.score,
+      streak: game.bestStreak,
+    });
+    const top = await getTop(game.mode, game.dailyKey);
+    res.json({ ok: true, entry, top });
+  } catch (err) {
+    console.error('Leaderboard submit failed:', err);
+    res.status(500).json({ error: 'Could not submit score right now.' });
+  }
 });
 
 // Fetch a leaderboard. mode=daily uses `date` (defaults to today) as the key;
 // mode=quick is a single all-time board.
-app.get('/api/leaderboard', (req, res) => {
+app.get('/api/leaderboard', async (req, res) => {
   const mode = req.query.mode === 'daily' ? 'daily' : 'quick';
   const dailyKey = typeof req.query.date === 'string' ? req.query.date : todayKey();
-  res.json({ mode, dailyKey, entries: getTop(mode, dailyKey) });
+  try {
+    const entries = await getTop(mode, dailyKey);
+    res.json({ mode, dailyKey, entries });
+  } catch (err) {
+    console.error('Leaderboard fetch failed:', err);
+    res.status(500).json({ error: 'Could not load leaderboard right now.' });
+  }
 });
 
 // ---- Private stats (not linked from the UI anywhere) ---------------------
@@ -143,14 +156,31 @@ app.get('/api/leaderboard', (req, res) => {
 // a secret key (ADMIN_SECRET env var) as a query param; wrong/missing key
 // gets a plain 404 rather than 401/403, so the route doesn't announce its
 // own existence to anyone probing the site.
-app.get('/api/internal/stats', (req, res) => {
+app.get('/api/internal/stats', async (req, res) => {
   const expected = process.env.ADMIN_SECRET || 'valueguessr-dev-admin-secret-change-me';
   if (req.query.key !== expected) {
     return res.status(404).end();
   }
-  res.json({ totalGamesPlayed: getGamesPlayedCount() });
+  try {
+    res.json({ totalGamesPlayed: await getGamesPlayedCount() });
+  } catch (err) {
+    console.error('Stats fetch failed:', err);
+    res.status(500).json({ error: 'Could not load stats.' });
+  }
 });
 
-app.listen(PORT, () => {
-  console.log(`ValueGuessr running at http://localhost:${PORT}`);
-});
+initSchema()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`ValueGuessr running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    // Don't let a DB hiccup at boot take the whole app down -- leaderboard.js
+    // and playCounter.js both fall back to file storage if MySQL isn't
+    // reachable, so it's still safe to start the server either way.
+    console.error('DB schema init failed, starting anyway:', err.message);
+    app.listen(PORT, () => {
+      console.log(`ValueGuessr running at http://localhost:${PORT}`);
+    });
+  });
