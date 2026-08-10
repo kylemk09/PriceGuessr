@@ -33,7 +33,9 @@
     "yearBuilt": 1980,
     "image": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Craftsman_Bungalow_-_Brooklyn%2C_NY_-_519_East_16th_Street_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.6782,
+    "lng": -73.9442
   },
   {
     "id": 3,
@@ -51,7 +53,9 @@
     "yearBuilt": 1913,
     "image": "https://upload.wikimedia.org/wikipedia/commons/6/63/Craftsman_Bungalow_-_Brooklyn%2C_NY_-_549_East_16th_Street_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.6782,
+    "lng": -73.9442
   },
   {
     "id": 4,
@@ -69,7 +73,9 @@
     "yearBuilt": 1984,
     "image": "https://upload.wikimedia.org/wikipedia/commons/9/91/Craftsman_Bungalow_-_Deer_Isle%2C_ME_-_The_Trivet_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.2201,
+    "lng": -68.6772
   },
   {
     "id": 5,
@@ -87,7 +93,9 @@
     "yearBuilt": 1989,
     "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Craftsman_Bungalow_-_Northfield%2C_MN_-_Carleton_College_%28Headley_House%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.4583,
+    "lng": -93.1616
   },
   {
     "id": 6,
@@ -105,7 +113,9 @@
     "yearBuilt": 2013,
     "image": "https://upload.wikimedia.org/wikipedia/commons/7/79/Craftsman_Bungalow_-_Northfield%2C_MN_-_Elm_Street_%28201%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.4583,
+    "lng": -93.1616
   },
   {
     "id": 7,
@@ -123,7 +133,9 @@
     "yearBuilt": 2015,
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/49/Craftsman_Bungalow_-_Northfield%2C_MN_-_Union_Street_%28320%29_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.4583,
+    "lng": -93.1616
   },
   {
     "id": 8,
@@ -141,7 +153,9 @@
     "yearBuilt": 2012,
     "image": "https://upload.wikimedia.org/wikipedia/commons/2/29/Craftsman_Bungalow_-_Saint_Paul%2C_MN_-_790_Ashland_Avenue_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.9537,
+    "lng": -93.09
   },
   {
     "id": 9,
@@ -159,7 +173,9 @@
     "yearBuilt": 1924,
     "image": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Craftsman_Bungalow_-_Tuckerton%2C_NJ_-_2039_Hammonton_Road_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.6009,
+    "lng": -74.3388
   },
   {
     "id": 10,
@@ -177,7 +193,9 @@
     "yearBuilt": 2011,
     "image": "https://upload.wikimedia.org/wikipedia/commons/2/27/Craftsman_Bungalow_-_Williams_Bay%2C_WI_-_171_Congress_Street_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.5766,
+    "lng": -88.5432
   },
   {
     "id": 11,
@@ -195,7 +213,9 @@
     "yearBuilt": 1934,
     "image": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Frank_Lloyd_Wright_-_Milwaukee%2C_WI_-_Burnham_Block_%28Richards_Bungalow%29_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.0389,
+    "lng": -87.9065
   },
   {
     "id": 12,
@@ -213,7 +233,9 @@
     "yearBuilt": 2024,
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/1102_Debra_Lane_-_panoramio.jpg",
     "imageCredit": "Photo by Corey Coyle — CC BY 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.0731,
+    "lng": -89.4012
   },
   {
     "id": 13,
@@ -231,7 +253,9 @@
     "yearBuilt": 1948,
     "image": "https://upload.wikimedia.org/wikipedia/commons/2/2d/4523_Chatham_Drive_%282771384495%29.jpg",
     "imageCredit": "Photo by Rob Grambau — CC BY 2.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.6156,
+    "lng": -84.2472
   },
   {
     "id": 14,
@@ -249,7 +273,9 @@
     "yearBuilt": 1935,
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/47/Dr_Bertram_L_Snyder_House.jpg",
     "imageCredit": "Photo by Blackbettie2 — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.4484,
+    "lng": -112.074
   },
   {
     "id": 15,
@@ -267,7 +293,9 @@
     "yearBuilt": 2014,
     "image": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Hanson_Residence_-_Roseburg_Oregon.jpg",
     "imageCredit": "Photo by Ian Poellet — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.2165,
+    "lng": -123.3417
   },
   {
     "id": 16,
@@ -285,7 +313,9 @@
     "yearBuilt": 1933,
     "image": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Jack_Batton_house_in_Minden%2C_LA_IMG_0617.JPG",
     "imageCredit": "Photo by Billy Hathorn — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 32.6152,
+    "lng": -93.2865
   },
   {
     "id": 17,
@@ -303,7 +333,9 @@
     "yearBuilt": 1987,
     "image": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Olson_House_-_Ashland_Oregon.jpg",
     "imageCredit": "Photo by Ian Poellet — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.1946,
+    "lng": -122.7095
   },
   {
     "id": 18,
@@ -321,7 +353,9 @@
     "yearBuilt": 1950,
     "image": "https://upload.wikimedia.org/wikipedia/commons/5/5a/RamblerHouse.JPG",
     "imageCredit": "Photo by TrustTruth — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.6097,
+    "lng": -111.9391
   },
   {
     "id": 19,
@@ -339,7 +373,9 @@
     "yearBuilt": 2011,
     "image": "https://upload.wikimedia.org/wikipedia/commons/1/15/Ranch_houses_on_6th_St_Marshfield_Wisconsin.jpg",
     "imageCredit": "Photo by Jeff the quiet — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.6689,
+    "lng": -90.1718
   },
   {
     "id": 20,
@@ -357,7 +393,9 @@
     "yearBuilt": 2000,
     "image": "https://upload.wikimedia.org/wikipedia/commons/9/95/SnyderHouse.jpg",
     "imageCredit": "Photo by Blackbettie2 — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.4484,
+    "lng": -112.074
   },
   {
     "id": 21,
@@ -375,7 +413,9 @@
     "yearBuilt": 1940,
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/46/Sycamore_Drive_in_Wallace_Park.jpg",
     "imageCredit": "Photo by Nyttend — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 37.0834,
+    "lng": -88.6
   },
   {
     "id": 22,
@@ -393,7 +433,9 @@
     "yearBuilt": 1921,
     "image": "https://upload.wikimedia.org/wikipedia/commons/0/03/William_O._Bradley_House_site.jpg",
     "imageCredit": "Photo by Nyttend — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 37.6173,
+    "lng": -84.5799
   },
   {
     "id": 23,
@@ -411,7 +453,9 @@
     "yearBuilt": 1973,
     "image": "https://upload.wikimedia.org/wikipedia/commons/9/9a/1019-1037_30th_Street_NW.jpg",
     "imageCredit": "Photo by APK — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.9072,
+    "lng": -77.0369
   },
   {
     "id": 24,
@@ -429,7 +473,9 @@
     "yearBuilt": 1912,
     "image": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Smokey_Hollow_Commemorative_Row_Houses.jpg",
     "imageCredit": "Photo by WikiWhens — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 30.4383,
+    "lng": -84.2807
   },
   {
     "id": 25,
@@ -447,7 +493,9 @@
     "yearBuilt": 2017,
     "image": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Allendale%2C_townhomes_%2821577359786%29.jpg",
     "imageCredit": "Photo by Preservation Maryland — CC BY-SA 2.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.2904,
+    "lng": -76.6122
   },
   {
     "id": 26,
@@ -465,7 +513,9 @@
     "yearBuilt": 2023,
     "image": "https://upload.wikimedia.org/wikipedia/commons/7/79/Bryant_Avenue%2C_Clifton%2C_Cincinnati%2C_OH_%2831899526987%29.jpg",
     "imageCredit": "Photo by Warren LeMay — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.1031,
+    "lng": -84.512
   },
   {
     "id": 27,
@@ -501,7 +551,9 @@
     "yearBuilt": 1931,
     "image": "https://upload.wikimedia.org/wikipedia/commons/5/5b/House_at_802-804_South_G_Street.jpg",
     "imageCredit": "Photo by Murderbike — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 47.2529,
+    "lng": -122.4443
   },
   {
     "id": 29,
@@ -555,7 +607,9 @@
     "yearBuilt": 1992,
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/48/R._H._Farwell_House%2C_2222-2224_Massachusetts_Avenue%2C_Cambridge%2C_MA_-_IMG_4419.JPG",
     "imageCredit": "Photo by Daderot — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.3736,
+    "lng": -71.1097
   },
   {
     "id": 32,
@@ -627,7 +681,9 @@
     "yearBuilt": 2020,
     "image": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Twin_houses%2C_West_Mount_Airy_%28Philadelphia%2C_Pennsylvania%2C_USA%29.jpg",
     "imageCredit": "Photo by Treeemont — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.9526,
+    "lng": -75.1652
   },
   {
     "id": 36,
@@ -681,7 +737,9 @@
     "yearBuilt": 1951,
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/34/Semi-detached_houses_%2824218841022%29.jpg",
     "imageCredit": "Photo by www.Pixel.la Free Stock Photos — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.7608,
+    "lng": -111.891
   },
   {
     "id": 39,
@@ -1005,7 +1063,9 @@
     "yearBuilt": 1980,
     "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/260_Gold_Street.jpg",
     "imageCredit": "Photo by Kingcalico — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.6782,
+    "lng": -73.9442
   },
   {
     "id": 57,
@@ -1023,7 +1083,9 @@
     "yearBuilt": 1980,
     "image": "https://upload.wikimedia.org/wikipedia/commons/6/6c/300_Main_St.%2C_Winnipeg.jpg",
     "imageCredit": "Photo by Jimj wpg — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 49.8951,
+    "lng": -97.1384
   },
   {
     "id": 58,
@@ -1041,7 +1103,9 @@
     "yearBuilt": 1971,
     "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/513_Saluda%2C_Columbia_SC_%282026%29.jpg",
     "imageCredit": "Photo by ProfReader — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 34.0007,
+    "lng": -81.0348
   },
   {
     "id": 59,
@@ -1059,7 +1123,9 @@
     "yearBuilt": 1954,
     "image": "https://upload.wikimedia.org/wikipedia/commons/9/97/519_Saluda%2C_Columbia_SC_%282026%29.jpg",
     "imageCredit": "Photo by ProfReader — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 34.0007,
+    "lng": -81.0348
   },
   {
     "id": 60,
@@ -1077,7 +1143,9 @@
     "yearBuilt": 1966,
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/527_Saluda%2C_Columbia_SC_%282026%29.jpg",
     "imageCredit": "Photo by ProfReader — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 34.0007,
+    "lng": -81.0348
   },
   {
     "id": 61,
@@ -1095,7 +1163,9 @@
     "yearBuilt": 1998,
     "image": "https://upload.wikimedia.org/wikipedia/commons/f/f7/531_Saluda%2C_Columbia_SC_%282026%29.jpg",
     "imageCredit": "Photo by ProfReader — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 34.0007,
+    "lng": -81.0348
   },
   {
     "id": 62,
@@ -1149,7 +1219,9 @@
     "yearBuilt": 2020,
     "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Apartment_building%2C_University_District%2C_ca_1930_%28SEATTLE_3684%29.jpg",
     "imageCredit": "Unknown photographer (Seattle Municipal Archives) — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 47.6062,
+    "lng": -122.3321
   },
   {
     "id": 65,
@@ -1185,7 +1257,9 @@
     "yearBuilt": 1982,
     "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Brentwood_Towers_In_Saint_John.jpg",
     "imageCredit": "Photo by Demon9984 — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 45.2733,
+    "lng": -66.0633
   },
   {
     "id": 67,
@@ -1203,7 +1277,9 @@
     "yearBuilt": 2024,
     "image": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Carleton_Towers_Saint_John.jpg",
     "imageCredit": "Photo by Demon9984 — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 45.2733,
+    "lng": -66.0633
   },
   {
     "id": 68,
@@ -1221,7 +1297,9 @@
     "yearBuilt": 1951,
     "image": "https://upload.wikimedia.org/wikipedia/commons/5/57/Carnation_Apartments%2C_Carnation%2C_Washington%2C_ca_1930_%28WASTATE_376%29.jpg",
     "imageCredit": "Unknown photographer (Washington State Archives) — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 47.6484,
+    "lng": -121.9165
   },
   {
     "id": 69,
@@ -1329,7 +1407,9 @@
     "yearBuilt": 1973,
     "image": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Blue_Cottage.JPG",
     "imageCredit": "Photo by Dsw4 — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.2378,
+    "lng": -76.9769
   },
   {
     "id": 75,
@@ -1365,7 +1445,9 @@
     "yearBuilt": 2014,
     "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Cottage_%2838683890955%29.jpg",
     "imageCredit": "Photo by oatsy40 — CC BY 2.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.4484,
+    "lng": -112.074
   },
   {
     "id": 77,
@@ -1401,7 +1483,9 @@
     "yearBuilt": 1993,
     "image": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Cottage_on_the_water.jpg",
     "imageCredit": "Photo by Steve Hillebrand, U.S. Fish and Wildlife Service — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.3601,
+    "lng": -71.0589
   },
   {
     "id": 79,
@@ -1419,7 +1503,9 @@
     "yearBuilt": 2014,
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/47/Country_cottage_2005.jpg",
     "imageCredit": "Wikimedia Commons contributor — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 35.7796,
+    "lng": -78.6382
   },
   {
     "id": 80,
@@ -1509,7 +1595,9 @@
     "yearBuilt": 1967,
     "image": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Calgary_-_Monterey_Park.jpg",
     "imageCredit": "Photo by Benefactor123 — CC BY 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 51.0447,
+    "lng": -114.0719
   },
   {
     "id": 85,
@@ -1527,7 +1615,9 @@
     "yearBuilt": 2004,
     "image": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Chicago_bungalow.jpg",
     "imageCredit": "Photo by blahedo — CC BY-SA 2.5, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 41.8781,
+    "lng": -87.6298
   },
   {
     "id": 86,
@@ -1545,7 +1635,9 @@
     "yearBuilt": 1994,
     "image": "https://upload.wikimedia.org/wikipedia/commons/1/12/Bungalows_on_E_2nd_Marshfield_Wisc.jpg",
     "imageCredit": "Photo by Jeff the quiet — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.6689,
+    "lng": -90.1718
   },
   {
     "id": 87,
@@ -1563,7 +1655,9 @@
     "yearBuilt": 2021,
     "image": "https://upload.wikimedia.org/wikipedia/commons/c/c8/955_Mellody_Rd.JPG",
     "imageCredit": "Photo by Rommy Lopat — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 45.5152,
+    "lng": -122.6784
   },
   {
     "id": 88,
@@ -1581,7 +1675,9 @@
     "yearBuilt": 2003,
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/3f/James_W_Thorne_House%2C_525_Broadsmoor.JPG",
     "imageCredit": "Photo by Rommy Lopat — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 27.9506,
+    "lng": -82.4572
   },
   {
     "id": 89,
@@ -1599,7 +1695,9 @@
     "yearBuilt": 1987,
     "image": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Captain_William_Allen_House_1.jpg",
     "imageCredit": "Photo by Upstateherd — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.0997,
+    "lng": -94.5786
   },
   {
     "id": 90,
@@ -1635,7 +1733,9 @@
     "yearBuilt": 1939,
     "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/E_Lanc_Downingtown_a.JPG",
     "imageCredit": "Photo by Smallbones — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.0065,
+    "lng": -75.7024
   },
   {
     "id": 92,
@@ -1653,7 +1753,9 @@
     "yearBuilt": 1932,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/410_South_Main_Street%2C_Bowling_Green%2C_Ohio.jpg/1280px-410_South_Main_Street%2C_Bowling_Green%2C_Ohio.jpg",
     "imageCredit": "Photo by Mbrickn — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 41.3748,
+    "lng": -83.6513
   },
   {
     "id": 93,
@@ -1671,7 +1773,9 @@
     "yearBuilt": 1933,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Backsplit_splitlevel_house_in_Southeast_PA.JPG/1280px-Backsplit_splitlevel_house_in_Southeast_PA.JPG",
     "imageCredit": "Photo by Degen Earthfast — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.4406,
+    "lng": -79.9959
   },
   {
     "id": 94,
@@ -1689,7 +1793,9 @@
     "yearBuilt": 1940,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Farmhouse_on_the_Arabia_Mountain_trail%2C_Conyers%2C_GA.jpg/1280px-Farmhouse_on_the_Arabia_Mountain_trail%2C_Conyers%2C_GA.jpg",
     "imageCredit": "Photo by eebAMDG — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.6698,
+    "lng": -84.0171
   },
   {
     "id": 95,
@@ -1707,7 +1813,9 @@
     "yearBuilt": 1973,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Historic_Farmhouse_on_Bradley_Mountain%2C_Southington%2C_CT.jpg/1280px-Historic_Farmhouse_on_Bradley_Mountain%2C_Southington%2C_CT.jpg",
     "imageCredit": "Photo by CosmicKanan — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 41.6009,
+    "lng": -72.8781
   },
   {
     "id": 96,
@@ -1725,7 +1833,9 @@
     "yearBuilt": 1995,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Houses_in_Cabbagetown_Toronto.jpg/1280px-Houses_in_Cabbagetown_Toronto.jpg",
     "imageCredit": "Photo by dbking — CC BY 2.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.6532,
+    "lng": -79.3832
   },
   {
     "id": 97,
@@ -1743,7 +1853,9 @@
     "yearBuilt": 2015,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/John_J_Prew_House%2C_Springdale%2C_Holyoke%2C_Massachusetts.jpg/1280px-John_J_Prew_House%2C_Springdale%2C_Holyoke%2C_Massachusetts.jpg",
     "imageCredit": "Photo by Simtropolitan — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.2042,
+    "lng": -72.6162
   },
   {
     "id": 98,
@@ -1761,7 +1873,9 @@
     "yearBuilt": 1952,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Raised_Ranch_-_Fairfield_Beach%2C_Connecticut.jpg/1280px-Raised_Ranch_-_Fairfield_Beach%2C_Connecticut.jpg",
     "imageCredit": "Photo by CityLimitsJunction — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 41.1408,
+    "lng": -73.2637
   },
   {
     "id": 99,
@@ -1779,7 +1893,9 @@
     "yearBuilt": 2004,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Robert_Dietz_Farmhouse%2C_North_Valley_New_Mexico.jpg/1280px-Robert_Dietz_Farmhouse%2C_North_Valley_New_Mexico.jpg",
     "imageCredit": "Photo by John Phelan — CC BY 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 35.0844,
+    "lng": -106.6504
   },
   {
     "id": 100,
@@ -1815,7 +1931,9 @@
     "yearBuilt": 1931,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/132_East_Broughton_Street%2C_Savannah%2C_Georgia.jpg/1280px-132_East_Broughton_Street%2C_Savannah%2C_Georgia.jpg",
     "imageCredit": "Photo by Pokemonprime — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 32.0809,
+    "lng": -81.0912
   },
   {
     "id": 102,
@@ -1905,7 +2023,9 @@
     "yearBuilt": 1953,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Arnold-Park_Log_Home.jpg/1280px-Arnold-Park_Log_Home.jpg",
     "imageCredit": "Photo by Visitor7 — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.7608,
+    "lng": -111.891
   },
   {
     "id": 107,
@@ -1923,7 +2043,9 @@
     "yearBuilt": 1996,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Benajah_Gray_Log_House.JPG/1280px-Benajah_Gray_Log_House.JPG",
     "imageCredit": "Photo by Skye Marthaler — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.4484,
+    "lng": -112.074
   },
   {
     "id": 108,
@@ -1941,7 +2063,9 @@
     "yearBuilt": 1958,
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/California_Mid-Century_Modern_Home_with_open-beam_ceiling_1960.jpg",
     "imageCredit": "Photo by GeorgeLouis — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.5816,
+    "lng": -121.4944
   },
   {
     "id": 109,
@@ -1977,7 +2101,9 @@
     "yearBuilt": 1968,
     "image": "https://upload.wikimedia.org/wikipedia/commons/a/a6/ChappaquaNY_SolomonResnickHouse.jpg",
     "imageCredit": "Photo by Magicpiano — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 41.1598,
+    "lng": -73.7871
   },
   {
     "id": 111,
@@ -1995,7 +2121,9 @@
     "yearBuilt": 1963,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Daniel_McMahan_House.JPG/1280px-Daniel_McMahan_House.JPG",
     "imageCredit": "Photo by Skye Marthaler — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.3601,
+    "lng": -71.0589
   },
   {
     "id": 112,
@@ -2013,7 +2141,9 @@
     "yearBuilt": 1928,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/St_Lawrence_River_House_in_front.JPG/1280px-St_Lawrence_River_House_in_front.JPG",
     "imageCredit": "Photo by Philipp Hienstorfer — CC BY 2.5, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 51.0447,
+    "lng": -114.0719
   },
   {
     "id": 113,
@@ -2895,7 +3025,9 @@
     "yearBuilt": 1984,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Palmer_Woods_House%2C_Detroit_MI.jpg/1280px-Palmer_Woods_House%2C_Detroit_MI.jpg",
     "imageCredit": "Photo by Andrew Jameson — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.3314,
+    "lng": -83.0458
   },
   {
     "id": 162,
@@ -2967,7 +3099,9 @@
     "yearBuilt": 1927,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Better_Johnson-Portis_House.jpg/1280px-Better_Johnson-Portis_House.jpg",
     "imageCredit": "Photo by SaltySemanticSchmuck — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 35.1465,
+    "lng": -90.1848
   },
   {
     "id": 166,
@@ -2985,7 +3119,9 @@
     "yearBuilt": 1974,
     "image": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Duplex_in_Nokomis_Knoll_neighborhood.jpg",
     "imageCredit": "Photo by Kimerlymn — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.9778,
+    "lng": -93.265
   },
   {
     "id": 167,
@@ -3021,7 +3157,9 @@
     "yearBuilt": 1979,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Glen_and_Inez_Kraus_house_Marshfield_Wisconsin.jpg/1280px-Glen_and_Inez_Kraus_house_Marshfield_Wisconsin.jpg",
     "imageCredit": "Photo by Jeff the quiet — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.6689,
+    "lng": -90.1718
   },
   {
     "id": 169,
@@ -3039,7 +3177,9 @@
     "yearBuilt": 1984,
     "image": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Jack_Frith_home%2C_Tujunga%2C_California.jpg",
     "imageCredit": "Photo by Wikigratia — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 34.2606,
+    "lng": -118.287
   },
   {
     "id": 170,
@@ -3057,7 +3197,9 @@
     "yearBuilt": 1932,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/1800s_Texas_House.JPG/1280px-1800s_Texas_House.JPG",
     "imageCredit": "Photo by Victorgrigas at English Wikipedia — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.5779,
+    "lng": -101.8552
   },
   {
     "id": 171,
@@ -3075,7 +3217,9 @@
     "yearBuilt": 2009,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Rowe_House_Wayland_NY_Apr_11.JPG/1280px-Rowe_House_Wayland_NY_Apr_11.JPG",
     "imageCredit": "Photo by Pubdog — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.5673,
+    "lng": -77.5936
   },
   {
     "id": 172,
@@ -3093,7 +3237,9 @@
     "yearBuilt": 2021,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bilateral_House.JPG/1280px-Bilateral_House.JPG",
     "imageCredit": "Photo by Archinia — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 30.2752,
+    "lng": -98.872
   },
   {
     "id": 173,
@@ -3111,7 +3257,9 @@
     "yearBuilt": 2017,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Booker_Home_%281_of_1%29.jpg/1280px-Booker_Home_%281_of_1%29.jpg",
     "imageCredit": "Photo by Renelibrary — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 32.236,
+    "lng": -97.7561
   },
   {
     "id": 174,
@@ -3147,7 +3295,9 @@
     "yearBuilt": 1950,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/116_Austin_Street_house_Levelland_Texas_2024_%281%29_01.jpg/1280px-116_Austin_Street_house_Levelland_Texas_2024_%281%29_01.jpg",
     "imageCredit": "Photo by Gerardolagunes — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.5873,
+    "lng": -102.3782
   },
   {
     "id": 176,
@@ -3165,7 +3315,9 @@
     "yearBuilt": 1922,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Schaefer_house_Marshfield_WI.jpg/1280px-Schaefer_house_Marshfield_WI.jpg",
     "imageCredit": "Photo by Jeff the quiet — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.6689,
+    "lng": -90.1718
   },
   {
     "id": 177,
@@ -3183,7 +3335,9 @@
     "yearBuilt": 2002,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Tudor_Revival_-_Danbury%2C_CT.jpg/1280px-Tudor_Revival_-_Danbury%2C_CT.jpg",
     "imageCredit": "Photo by CityLimitsJunction — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 41.3948,
+    "lng": -73.454
   },
   {
     "id": 178,
@@ -3201,7 +3355,9 @@
     "yearBuilt": 1913,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Prairie_School_-_Northfield%2C_MN_-_John_B._Phillips_House_%281%29.jpg/1280px-Prairie_School_-_Northfield%2C_MN_-_John_B._Phillips_House_%281%29.jpg",
     "imageCredit": "Photo by Bmzuckerman — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 44.4583,
+    "lng": -93.1616
   },
   {
     "id": 179,
@@ -3219,7 +3375,9 @@
     "yearBuilt": 1919,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Sea_Grove_Park%2C_Del_Mar%2C_CA.jpg/1280px-Sea_Grove_Park%2C_Del_Mar%2C_CA.jpg",
     "imageCredit": "Photo by FarFromTheMiddleEast — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 32.9595,
+    "lng": -117.2653
   },
   {
     "id": 180,
@@ -3237,7 +3395,9 @@
     "yearBuilt": 1989,
     "image": "https://upload.wikimedia.org/wikipedia/commons/8/8f/%24700%2C000_Home.jpg",
     "imageCredit": "Photo by BrendelSignature — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.5816,
+    "lng": -121.4944
   },
   {
     "id": 181,
@@ -3255,7 +3415,9 @@
     "yearBuilt": 2020,
     "image": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Beachhouses.jpg",
     "imageCredit": "Photo by Tom Madracki — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 30.2672,
+    "lng": -97.7431
   },
   {
     "id": 182,
@@ -3273,7 +3435,9 @@
     "yearBuilt": 1967,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Denison_July_2016_42_%28106_West_Sears_Street%29.jpg/1280px-Denison_July_2016_42_%28106_West_Sears_Street%29.jpg",
     "imageCredit": "Photo by Michael Barera — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.7557,
+    "lng": -96.5361
   },
   {
     "id": 183,
@@ -3291,7 +3455,9 @@
     "yearBuilt": 1929,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Carthage_July_2017_16_%28317_W_Panola_Street%29.jpg/1280px-Carthage_July_2017_16_%28317_W_Panola_Street%29.jpg",
     "imageCredit": "Photo by Michael Barera — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 32.1554,
+    "lng": -94.3388
   },
   {
     "id": 184,
@@ -3309,7 +3475,9 @@
     "yearBuilt": 1918,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Ennis_September_2017_19_%28201_N_Preston_Street%29.jpg/1280px-Ennis_September_2017_19_%28201_N_Preston_Street%29.jpg",
     "imageCredit": "Photo by Michael Barera — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 32.3293,
+    "lng": -96.625
   },
   {
     "id": 185,
@@ -3327,7 +3495,9 @@
     "yearBuilt": 1937,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Carrollton_July_2019_32_%281313_Walnut_Avenue%29.jpg/1280px-Carrollton_July_2019_32_%281313_Walnut_Avenue%29.jpg",
     "imageCredit": "Photo by Michael Barera — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 32.9537,
+    "lng": -96.8903
   },
   {
     "id": 186,
@@ -3345,7 +3515,9 @@
     "yearBuilt": 1931,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Carrollton_July_2019_37_%281105_N_Maryland_Street%29.jpg/1280px-Carrollton_July_2019_37_%281105_N_Maryland_Street%29.jpg",
     "imageCredit": "Photo by Michael Barera — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 32.9537,
+    "lng": -96.8903
   },
   {
     "id": 187,
@@ -3363,7 +3535,9 @@
     "yearBuilt": 1991,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Carmel_%285099014459%29.jpg/1280px-Carmel_%285099014459%29.jpg",
     "imageCredit": "Photo by Toi & Moi from au bord de la mer Méditerranée, France — CC BY-SA 2.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 36.5552,
+    "lng": -121.9233
   },
   {
     "id": 188,
@@ -3417,7 +3591,9 @@
     "yearBuilt": 1965,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/House_in_California_-_panoramio_%283427%29.jpg/1280px-House_in_California_-_panoramio_%283427%29.jpg",
     "imageCredit": "Photo by Andy “AJ” Jennings — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.5816,
+    "lng": -121.4944
   },
   {
     "id": 191,
@@ -3471,7 +3647,9 @@
     "yearBuilt": 1970,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Houses_on_Crows_Nest_Drive%2C_Sea_Ranch%2C_California-1409.jpg/1280px-Houses_on_Crows_Nest_Drive%2C_Sea_Ranch%2C_California-1409.jpg",
     "imageCredit": "Photo by Frank Schulenburg — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.7146,
+    "lng": -123.4522
   },
   {
     "id": 194,
@@ -4407,7 +4585,9 @@
     "yearBuilt": 1967,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/07_Motel_6_-_American_budget_motel_chain.JPG/1280px-07_Motel_6_-_American_budget_motel_chain.JPG",
     "imageCredit": "Photo by Marek Slusarczyk (Tupungato) — CC BY 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.7392,
+    "lng": -104.9903
   },
   {
     "id": 246,
@@ -4425,7 +4605,9 @@
     "yearBuilt": 1997,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/07_Quality_Inn_American_motel_chain.JPG/1280px-07_Quality_Inn_American_motel_chain.JPG",
     "imageCredit": "Photo by Marek Slusarczyk (Tupungato) — CC BY 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.5816,
+    "lng": -121.4944
   },
   {
     "id": 247,
@@ -4443,7 +4625,9 @@
     "yearBuilt": 1953,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/A_Simmons_Bank_location_in_Sweetwater%2C_Tennessee.jpg/1280px-A_Simmons_Bank_location_in_Sweetwater%2C_Tennessee.jpg",
     "imageCredit": "Photo by Harrison Keely — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 35.6006,
+    "lng": -84.461
   },
   {
     "id": 248,
@@ -4461,7 +4645,9 @@
     "yearBuilt": 1955,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Ahwatukee_Mercado.jpg/1280px-Ahwatukee_Mercado.jpg",
     "imageCredit": "Photo by Kiteinthewind — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 33.4484,
+    "lng": -112.074
   },
   {
     "id": 249,
@@ -4479,7 +4665,9 @@
     "yearBuilt": 2016,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Banco_Popular_Virgin_Islands.jpg/1280px-Banco_Popular_Virgin_Islands.jpg",
     "imageCredit": "Photo by Coolcaesar — CC BY-SA 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.615,
+    "lng": -116.2023
   },
   {
     "id": 250,
@@ -4497,7 +4685,9 @@
     "yearBuilt": 1960,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Cranberry_Mall_parking_lots_and_buildings.jpg/1280px-Cranberry_Mall_parking_lots_and_buildings.jpg",
     "imageCredit": "Photo by Nyttend — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.4406,
+    "lng": -79.9959
   },
   {
     "id": 251,
@@ -4515,7 +4705,9 @@
     "yearBuilt": 1922,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Empty_strip_mall_nashua_nh05.jpg/1280px-Empty_strip_mall_nashua_nh05.jpg",
     "imageCredit": "Photo by Jane023 — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.7654,
+    "lng": -71.4676
   },
   {
     "id": 252,
@@ -4533,7 +4725,9 @@
     "yearBuilt": 2005,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Mayfair_Shopping_Center%3B_East_Commack%2C_New_York.jpg/1280px-Mayfair_Shopping_Center%3B_East_Commack%2C_New_York.jpg",
     "imageCredit": "Photo by DanTD — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.8437,
+    "lng": -73.2929
   },
   {
     "id": 253,
@@ -4551,7 +4745,9 @@
     "yearBuilt": 1930,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Morrison%2C_Missouri_Bank.jpg/1280px-Morrison%2C_Missouri_Bank.jpg",
     "imageCredit": "Photo by TCP04 — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.4392,
+    "lng": -91.7857
   },
   {
     "id": 254,
@@ -4569,7 +4765,9 @@
     "yearBuilt": 1933,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Strip_mall.jpg/1280px-Strip_mall.jpg",
     "imageCredit": "Photo by Wikideas1 — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 35.0844,
+    "lng": -106.6504
   },
   {
     "id": 255,
@@ -4587,7 +4785,9 @@
     "yearBuilt": 2011,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Strip_mall_-_Georgia_%26_Kalmia.jpg/1280px-Strip_mall_-_Georgia_%26_Kalmia.jpg",
     "imageCredit": "Photo by Farragutful — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.0997,
+    "lng": -94.5786
   },
   {
     "id": 256,
@@ -4605,7 +4805,9 @@
     "yearBuilt": 1997,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Former_Saturn_of_Wexford%3B_Wexford_PA.jpg/1280px-Former_Saturn_of_Wexford%3B_Wexford_PA.jpg",
     "imageCredit": "Photo by Larry Hachucka — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.6323,
+    "lng": -80.057
   },
   {
     "id": 257,
@@ -4659,7 +4861,9 @@
     "yearBuilt": 1947,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Essex_Motors%2C_Essex%2C_Ontario%2C_2025-08-30.jpg/1280px-Essex_Motors%2C_Essex%2C_Ontario%2C_2025-08-30.jpg",
     "imageCredit": "Photo by Chris Woodrich — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.1728,
+    "lng": -82.8228
   },
   {
     "id": 260,
@@ -4677,7 +4881,9 @@
     "yearBuilt": 1949,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Triumph_dealership_on_Baronne_NOLA_CBD.jpg/1280px-Triumph_dealership_on_Baronne_NOLA_CBD.jpg",
     "imageCredit": "Photo by Karen Apricot — CC BY-SA 2.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 29.9511,
+    "lng": -90.0715
   },
   {
     "id": 261,
@@ -4731,7 +4937,9 @@
     "yearBuilt": 1982,
     "image": "https://upload.wikimedia.org/wikipedia/commons/9/99/500_East_Main_Street%28Norfolk%2C_Virginia%29.jpg",
     "imageCredit": "Photo by Norfolkian — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 36.8508,
+    "lng": -76.2859
   },
   {
     "id": 264,
@@ -4749,7 +4957,9 @@
     "yearBuilt": 1980,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Checker_Dealership_in_Washington_DC.jpg/1280px-Checker_Dealership_in_Washington_DC.jpg",
     "imageCredit": "Photo by Warren K. Leffler — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.9072,
+    "lng": -77.0369
   },
   {
     "id": 265,
@@ -4767,7 +4977,9 @@
     "yearBuilt": 1972,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/The_Lightning_Hotel%3B_Stanley%2C_BC.jpg/1280px-The_Lightning_Hotel%3B_Stanley%2C_BC.jpg",
     "imageCredit": "Photo by Ssarjola at English Wikipedia — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 46.2965,
+    "lng": -66.7473
   },
   {
     "id": 266,
@@ -4803,7 +5015,9 @@
     "yearBuilt": 1942,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Weigel%E2%80%99s_Location_68_Morristown%2C_TN.jpg/1280px-Weigel%E2%80%99s_Location_68_Morristown%2C_TN.jpg",
     "imageCredit": "Photo by AppalachianCentrist — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 36.214,
+    "lng": -83.2952
   },
   {
     "id": 268,
@@ -4821,7 +5035,9 @@
     "yearBuilt": 1961,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Canad_Inns_Destination_Centre_Fort_Garry.jpg/1280px-Canad_Inns_Destination_Centre_Fort_Garry.jpg",
     "imageCredit": "Photo by Peter Broster — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 49.8951,
+    "lng": -97.1384
   },
   {
     "id": 269,
@@ -4839,7 +5055,9 @@
     "yearBuilt": 2011,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Holiday_Inn_Express_Saint_John_Harbourside.jpg/1280px-Holiday_Inn_Express_Saint_John_Harbourside.jpg",
     "imageCredit": "Photo by Demon9984 — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 45.2733,
+    "lng": -66.0633
   },
   {
     "id": 270,
@@ -4875,7 +5093,9 @@
     "yearBuilt": 2002,
     "image": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Commerce_Headquarters_in_Kansas_City%2C_1000_Walnut.jpg",
     "imageCredit": "Photo by Commerce Bank — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.0997,
+    "lng": -94.5786
   },
   {
     "id": 272,
@@ -4911,7 +5131,9 @@
     "yearBuilt": 1936,
     "image": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Hancock-Whitney_headquarters._Gulfport%2C_MS.jpg",
     "imageCredit": "Photo by unknown author (via Hancock Whitney) — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 30.3674,
+    "lng": -89.0928
   },
   {
     "id": 274,
@@ -4929,7 +5151,9 @@
     "yearBuilt": 2006,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/First_Citizens_Bank%2C_owned_by_First_Citizens_Bancshares%2C_in_Toccoa%2C_Georgia_01.jpg/1280px-First_Citizens_Bank%2C_owned_by_First_Citizens_Bancshares%2C_in_Toccoa%2C_Georgia_01.jpg",
     "imageCredit": "Photo by Harrison Keely — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 34.5773,
+    "lng": -83.3324
   },
   {
     "id": 275,
@@ -4965,7 +5189,9 @@
     "yearBuilt": 1981,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Conventus_Building%2C_Buffalo%2C_New_York_-_20200528.jpg/1280px-Conventus_Building%2C_Buffalo%2C_New_York_-_20200528.jpg",
     "imageCredit": "Photo by Andre Carrotflower — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.8864,
+    "lng": -78.8784
   },
   {
     "id": 277,
@@ -5001,7 +5227,9 @@
     "yearBuilt": 1968,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Arapahoe_Medical_Plaza%2C_7720_S_Broadway%2C_Littleton%2C_CO_2021-01-06.jpg/1280px-Arapahoe_Medical_Plaza%2C_7720_S_Broadway%2C_Littleton%2C_CO_2021-01-06.jpg",
     "imageCredit": "Photo by Xnatedawgx — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.6133,
+    "lng": -105.0166
   },
   {
     "id": 279,
@@ -5019,7 +5247,9 @@
     "yearBuilt": 2013,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Kaiser_Permanente_Lakewood_Medical_Office_Building_2023-05-07.jpg/1280px-Kaiser_Permanente_Lakewood_Medical_Office_Building_2023-05-07.jpg",
     "imageCredit": "Photo by Xnatedawgx — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.7047,
+    "lng": -105.0814
   },
   {
     "id": 280,
@@ -5037,7 +5267,9 @@
     "yearBuilt": 1934,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Fidelity_Building%2C_NE_corner%2C_Dayton%2C_OH_2024-04-11.jpg/1280px-Fidelity_Building%2C_NE_corner%2C_Dayton%2C_OH_2024-04-11.jpg",
     "imageCredit": "Photo by Xnatedawgx — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.7589,
+    "lng": -84.1916
   },
   {
     "id": 281,
@@ -5055,7 +5287,9 @@
     "yearBuilt": 1932,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Kaiser_Permanente%2C_Franklin_Medical_Offices%2C_Denver%2C_CO_east_tower%2C_south_side_2016-05-03.jpg/1280px-Kaiser_Permanente%2C_Franklin_Medical_Offices%2C_Denver%2C_CO_east_tower%2C_south_side_2016-05-03.jpg",
     "imageCredit": "Photo by Xnatedawgx — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.7392,
+    "lng": -104.9903
   },
   {
     "id": 282,
@@ -5073,7 +5307,9 @@
     "yearBuilt": 1941,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/INTEGRIS_Health_Baptist_Medical_Center_Portland_Avenue%2C_Medical_Offices_South_2026-03-24.jpg/1280px-INTEGRIS_Health_Baptist_Medical_Center_Portland_Avenue%2C_Medical_Offices_South_2026-03-24.jpg",
     "imageCredit": "Photo by Xnatedawgx — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 35.4676,
+    "lng": -97.5164
   },
   {
     "id": 283,
@@ -5091,7 +5327,9 @@
     "yearBuilt": 1920,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Sentara_Rockingham_Memorial_Hospital_Medical_Center_main_st.jpg/1280px-Sentara_Rockingham_Memorial_Hospital_Medical_Center_main_st.jpg",
     "imageCredit": "Photo by Daniel Barrows — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.4496,
+    "lng": -78.8689
   },
   {
     "id": 284,
@@ -5109,7 +5347,9 @@
     "yearBuilt": 1997,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Public_Storage_Montebello.jpg/1280px-Public_Storage_Montebello.jpg",
     "imageCredit": "Photo by Eric Polk — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 34.0165,
+    "lng": -118.1131
   },
   {
     "id": 285,
@@ -5127,7 +5367,9 @@
     "yearBuilt": 1940,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Midtown_Medical_Offices%2C_Denver%2C_CO_SE_corner_2025-03-18.jpg/1280px-Midtown_Medical_Offices%2C_Denver%2C_CO_SE_corner_2025-03-18.jpg",
     "imageCredit": "Photo by Xnatedawgx — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 39.7392,
+    "lng": -104.9903
   },
   {
     "id": 286,
@@ -5199,7 +5441,9 @@
     "yearBuilt": 1944,
     "image": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Calgary_Self_Storage_%28163640889%29.jpeg",
     "imageCredit": "Photo by Ken Paknstor — CC BY 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 51.0447,
+    "lng": -114.0719
   },
   {
     "id": 290,
@@ -5253,7 +5497,9 @@
     "yearBuilt": 1976,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Retail_and_Office_Development_in_Tacoma%2C_WA.jpg/1280px-Retail_and_Office_Development_in_Tacoma%2C_WA.jpg",
     "imageCredit": "Photo by Jacob Rose — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 47.2529,
+    "lng": -122.4443
   },
   {
     "id": 293,
@@ -5271,7 +5517,9 @@
     "yearBuilt": 1959,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/StorageMartMarkham.jpg/1280px-StorageMartMarkham.jpg",
     "imageCredit": "Photo by Raysonho @ Open Grid Scheduler / Scalable Grid Engine — CC0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.8561,
+    "lng": -79.337
   },
   {
     "id": 294,
@@ -5289,7 +5537,9 @@
     "yearBuilt": 1970,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Fleet_Farm_West_Bend_Store_Location.jpg/1280px-Fleet_Farm_West_Bend_Store_Location.jpg",
     "imageCredit": "Photo by Fleet Farm Marketing Team Member — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 43.4252,
+    "lng": -88.1834
   },
   {
     "id": 295,
@@ -5307,7 +5557,9 @@
     "yearBuilt": 2018,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Former_Swansea_Mall_renovated_entrance_2023.jpg/1280px-Former_Swansea_Mall_renovated_entrance_2023.jpg",
     "imageCredit": "Photo by OldPalChummus — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 41.7509,
+    "lng": -71.1798
   },
   {
     "id": 296,
@@ -5343,7 +5595,9 @@
     "yearBuilt": 1929,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Amy%27s_Attic_Self_Storage_Waco_Location.jpg/1280px-Amy%27s_Attic_Self_Storage_Waco_Location.jpg",
     "imageCredit": "Photo by Teri.lynn.curtis — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 31.5493,
+    "lng": -97.1467
   },
   {
     "id": 298,
@@ -5379,7 +5633,9 @@
     "yearBuilt": 1982,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Capital-City-Mall_2015-09-21.jpg/1280px-Capital-City-Mall_2015-09-21.jpg",
     "imageCredit": "Photo by CuddlesTheTiger — CC BY-SA 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.2334,
+    "lng": -76.9269
   },
   {
     "id": 300,
@@ -5451,7 +5707,9 @@
     "yearBuilt": 2017,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Boscovs-Centre-at-Salisbury-2025.jpg/1280px-Boscovs-Centre-at-Salisbury-2025.jpg",
     "imageCredit": "Photo by SteveBDel — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 38.3607,
+    "lng": -75.5994
   },
   {
     "id": 304,
@@ -5505,7 +5763,9 @@
     "yearBuilt": 2011,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Eastland_Mall_%28Bloomington%2C_IL%29_Entrance.jpg/1280px-Eastland_Mall_%28Bloomington%2C_IL%29_Entrance.jpg",
     "imageCredit": "Photo by CalciumRods — CC BY 4.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 40.4842,
+    "lng": -88.9937
   },
   {
     "id": 307,
@@ -5541,7 +5801,9 @@
     "yearBuilt": 1972,
     "image": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Boedeker_Plastics_Warehouse.jpg",
     "imageCredit": "Photo by Scottbaer at English Wikipedia — Public Domain, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 30.6744,
+    "lng": -96.37
   },
   {
     "id": 309,
@@ -5559,7 +5821,9 @@
     "yearBuilt": 1991,
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/BlueLinx_warehouse_Ypsilanti_Michigan.JPG/1280px-BlueLinx_warehouse_Ypsilanti_Michigan.JPG",
     "imageCredit": "Photo by Dwight Burdette — CC BY 3.0, via Wikimedia Commons",
-    "isFamous": false
+    "isFamous": false,
+    "lat": 42.2411,
+    "lng": -83.613
   },
   {
     "id": 310,
@@ -5686,7 +5950,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Playboy_Mansion_North_Side_2007.jpg",
     "imageCredit": "Glenn Francis, www.PacificProDigital.com — CC BY-SA 3.0",
     "isFamous": true,
-    "priceSource": "Sold August 2016 for $100M to Daren Metropoulos — the most expensive home sale in Los Angeles County history at the time (CNN, TIME)."
+    "priceSource": "Sold August 2016 for $100M to Daren Metropoulos — the most expensive home sale in Los Angeles County history at the time (CNN, TIME).",
+    "lat": 34.0968,
+    "lng": -118.4331
   },
   {
     "id": 317,
@@ -5705,7 +5971,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/3d/220_Central_Park_South_td_03.jpg",
     "imageCredit": "Tdorante10 — CC BY-SA 4.0",
     "isFamous": true,
-    "priceSource": "Bought by Ken Griffin in January 2019 for $238M — still the most expensive home ever sold in the United States (CNBC, StreetEasy, CityRealty)."
+    "priceSource": "Bought by Ken Griffin in January 2019 for $238M — still the most expensive home ever sold in the United States (CNBC, StreetEasy, CityRealty).",
+    "lat": 40.7674,
+    "lng": -73.9807
   },
   {
     "id": 318,
@@ -5724,7 +5992,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/2017_One57_tower_from_Seventh_Avenue.jpg/1280px-2017_One57_tower_from_Seventh_Avenue.jpg",
     "imageCredit": "Beyond My Ken — CC BY-SA 4.0",
     "isFamous": true,
-    "priceSource": "Bought by Michael Dell for $100.47M, revealed publicly in 2018 — was the most expensive home sale in NYC history at the time (CNBC, 6sqft)."
+    "priceSource": "Bought by Michael Dell for $100.47M, revealed publicly in 2018 — was the most expensive home sale in NYC history at the time (CNBC, 6sqft).",
+    "lat": 40.7648,
+    "lng": -73.9808
   },
   {
     "id": 319,
@@ -5743,7 +6013,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/8/84/Graceland_front.jpg",
     "imageCredit": "User:Maha — CC BY 2.5",
     "isFamous": true,
-    "priceSource": "Estimated worth $400–500M today (land, buildings, contents, and brand value combined) — widely reported estimate, not a recent sale price."
+    "priceSource": "Estimated worth $400–500M today (land, buildings, contents, and brand value combined) — widely reported estimate, not a recent sale price.",
+    "lat": 35.0457,
+    "lng": -90.0226
   },
   {
     "id": 320,
@@ -5762,7 +6034,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Biltmore_Estate_3.jpg",
     "imageCredit": "Self-photographed, Wikimedia Commons — CC BY-SA 3.0",
     "isFamous": true,
-    "priceSource": "Estimated appraisal value (house + grounds), based on published property valuation breakdowns — not for sale, privately owned by the Cecil family."
+    "priceSource": "Estimated appraisal value (house + grounds), based on published property valuation breakdowns — not for sale, privately owned by the Cecil family.",
+    "lat": 35.541,
+    "lng": -82.5515
   },
   {
     "id": 321,
@@ -5781,7 +6055,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Fallingwater%2C_the_classic_view.jpg/1280px-Fallingwater%2C_the_classic_view.jpg",
     "imageCredit": "AaronBarlow — CC BY-SA 4.0",
     "isFamous": true,
-    "priceSource": "Estimated current worth ~$2.7M — owned by the Western Pennsylvania Conservancy and operated as a museum, not for sale."
+    "priceSource": "Estimated current worth ~$2.7M — owned by the Western Pennsylvania Conservancy and operated as a museum, not for sale.",
+    "lat": 39.9067,
+    "lng": -79.4676
   },
   {
     "id": 322,
@@ -5800,7 +6076,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/432_Park_Ave_New_York_NY%2C_2017.jpg/1280px-432_Park_Ave_New_York_NY%2C_2017.jpg",
     "imageCredit": "PeterSesar — CC BY-SA 4.0",
     "isFamous": true,
-    "priceSource": "Sold February 2023 for $180M, occupying the entire 96th floor — one of the highest residential sale prices in U.S. history (CityRealty, 6sqft)."
+    "priceSource": "Sold February 2023 for $180M, occupying the entire 96th floor — one of the highest residential sale prices in U.S. history (CityRealty, 6sqft).",
+    "lat": 40.7617,
+    "lng": -73.9718
   },
   {
     "id": 323,
@@ -5838,7 +6116,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Sears_Tower_from_the_Chicago_River%2C_Chicago%2C_IL.jpg/1280px-Sears_Tower_from_the_Chicago_River%2C_Chicago%2C_IL.jpg",
     "imageCredit": "w_lemay — CC0, via Wikimedia Commons",
     "isFamous": true,
-    "priceSource": "Sold March 2015 to Blackstone for $1.3B — the highest price ever paid for a single U.S. office building outside New York City at the time (CNN, Fortune)."
+    "priceSource": "Sold March 2015 to Blackstone for $1.3B — the highest price ever paid for a single U.S. office building outside New York City at the time (CNN, Fortune).",
+    "lat": 41.8789,
+    "lng": -87.6359
   },
   {
     "id": 325,
@@ -5857,7 +6137,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/59th_St_5th_Av_td_%282018-08-27%29_11_-_General_Motors_Building.jpg/1280px-59th_St_5th_Av_td_%282018-08-27%29_11_-_General_Motors_Building.jpg",
     "imageCredit": "Tdorante10 — CC BY-SA 4.0",
     "isFamous": true,
-    "priceSource": "Bought by Boston Properties (with Goldman Sachs and Meraas Capital) for $2.8B in June 2008 — one of the largest single-office-tower sales in U.S. history (SEC filings, Property Funds World)."
+    "priceSource": "Bought by Boston Properties (with Goldman Sachs and Meraas Capital) for $2.8B in June 2008 — one of the largest single-office-tower sales in U.S. history (SEC filings, Property Funds World).",
+    "lat": 40.7639,
+    "lng": -73.9734
   },
   {
     "id": 326,
@@ -5876,7 +6158,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Waldorf_Astoria_exterior.jpg/1280px-Waldorf_Astoria_exterior.jpg",
     "imageCredit": "Alan Light — CC BY 2.0",
     "isFamous": true,
-    "priceSource": "Sold by Hilton to China's Anbang Insurance Group for $1.95B in October 2014 — the most expensive hotel sale in U.S. history at the time (CNBC, Hilton)."
+    "priceSource": "Sold by Hilton to China's Anbang Insurance Group for $1.95B in October 2014 — the most expensive hotel sale in U.S. history at the time (CNBC, Hilton).",
+    "lat": 40.7566,
+    "lng": -73.9741
   },
   {
     "id": 327,
@@ -5895,7 +6179,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/8/84/Chrysler_Building_2011.jpg",
     "imageCredit": "Valfex — CC BY-SA 4.0",
     "isFamous": true,
-    "priceSource": "Sold in March 2019 to Austrian developer Signa Holding and RFR Holding for $150M — a steep discount from its $800M sale in 2008 (6sqft, GlobeSt)."
+    "priceSource": "Sold in March 2019 to Austrian developer Signa Holding and RFR Holding for $150M — a steep discount from its $800M sale in 2008 (6sqft, GlobeSt).",
+    "lat": 40.7516,
+    "lng": -73.9755
   },
   {
     "id": 328,
