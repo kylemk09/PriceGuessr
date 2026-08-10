@@ -71,15 +71,68 @@
             </div>
           </div>
 
-          <div class="start-actions">
-            <button class="btn btn-primary btn-lg" id="btnQuickPlay">
-              ▶ Quick Play
+          <div class="main-menu" id="mainMenu">
+            <button class="btn btn-primary btn-lg menu-btn" id="btnClassic" type="button">
+              <span class="menu-btn-icon">🎯</span>
+              <span class="menu-btn-label">Classic</span>
             </button>
-            <button class="btn btn-ghost btn-lg" id="btnDailyPlay">
-              📅 Daily Challenge
+            <button class="btn btn-secondary btn-lg menu-btn" id="btnDaily" type="button">
+              <span class="menu-btn-icon">📅</span>
+              <span class="menu-btn-label">Daily Challenge</span>
             </button>
+            <button class="btn btn-ghost btn-lg menu-btn" id="btnSelectCity" type="button">
+              <span class="menu-btn-icon">📍</span>
+              <span class="menu-btn-label">Select City</span>
+            </button>
+            <div class="menu-row">
+              <button class="btn btn-outline" id="btnMenuLeaderboard" type="button">🏆 Leaderboard</button>
+              <button class="btn btn-outline" id="btnMenuSettings" type="button">⚙️ Settings</button>
+            </div>
           </div>
           <p class="daily-hint">Daily Challenge gives everyone the same 5 houses today — compare scores with friends.</p>
+        </div>
+      </section>
+
+      <!-- ============ SELECT CITY SCREEN ============ -->
+      <section class="screen" id="screen-citymap" data-screen="citymap" hidden>
+        <div class="glass card citymap-card">
+          <button class="btn-back" id="btnCityMapBack" type="button" aria-label="Back to menu">← Back</button>
+          <h1 class="screen-title">📍 Select City</h1>
+          <p class="screen-subtitle">Drag the circle to an area, then confirm to play 5 rounds from there.</p>
+          <div class="citymap-placeholder" id="citymapPlaceholder">
+            <p>Map setup pending.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ LEADERBOARD SCREEN ============ -->
+      <section class="screen" id="screen-leaderboard" data-screen="leaderboard" hidden>
+        <div class="glass card leaderboard-card">
+          <button class="btn-back" id="btnLeaderboardBack" type="button" aria-label="Back">← Back</button>
+          <h1 class="screen-title">🏆 Leaderboard</h1>
+          <div class="leaderboard-tabs">
+            <button class="leaderboard-tab" id="btnTabDaily" data-tab="daily">📅 Daily</button>
+            <button class="leaderboard-tab" id="btnTabQuick" data-tab="quick">⚡ Quick Play</button>
+          </div>
+          <p class="leaderboard-subtitle" id="leaderboardSubtitle">Today's Daily Challenge</p>
+          <ol class="leaderboard-list" id="leaderboardList"></ol>
+        </div>
+      </section>
+
+      <!-- ============ SETTINGS SCREEN ============ -->
+      <section class="screen" id="screen-settings" data-screen="settings" hidden>
+        <div class="glass card settings-card">
+          <button class="btn-back" id="btnSettingsBack" type="button" aria-label="Back to menu">← Back</button>
+          <h1 class="screen-title">⚙️ Settings</h1>
+          <div class="settings-row">
+            <div class="settings-row-text">
+              <span class="settings-row-title">Sound Effects</span>
+              <span class="settings-row-desc">Guess submit + reveal sounds</span>
+            </div>
+            <button class="sound-toggle" id="btnToggleSound" type="button" role="switch" aria-checked="true">
+              <span class="sound-toggle-track"><span class="sound-toggle-thumb"></span></span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -253,20 +306,6 @@
     </div>
   </div>
 
-  <!-- Leaderboard viewer -->
-  <div class="modal-overlay" id="leaderboardViewOverlay" hidden>
-    <div class="glass card modal-card leaderboard-card">
-      <h3 class="modal-title">🏆 Leaderboard</h3>
-      <div class="leaderboard-tabs">
-        <button class="leaderboard-tab" id="btnTabDaily" data-tab="daily">📅 Daily</button>
-        <button class="leaderboard-tab" id="btnTabQuick" data-tab="quick">⚡ Quick Play</button>
-      </div>
-      <p class="leaderboard-subtitle" id="leaderboardSubtitle">Today's Daily Challenge</p>
-      <ol class="leaderboard-list" id="leaderboardList"></ol>
-      <button class="btn btn-outline" id="btnCloseLeaderboard">Close</button>
-    </div>
-  </div>
-
   <!-- Sound effects: drop free/CC0 .mp3 files into public/sounds/ named
        submit.mp3 and reveal.mp3 to enable. Missing files fail silently. -->
   <audio id="sfxSubmit" src="/sounds/submit.mp3" preload="none"></audio>
@@ -284,6 +323,7 @@
   </script>
   <script src="/js/ticker.js" defer></script>
   <script src="/js/stats.js" defer></script>
+  <script src="/js/settings.js" defer></script>
   <script src="/js/sharecard.js" defer></script>
   <script src="/js/game.js" defer></script>
 </body>

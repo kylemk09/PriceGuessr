@@ -54,6 +54,8 @@
     return sym + n + ' ' + code;
   }
 
+  var SCREENS = ['start', 'game', 'results', 'leaderboard', 'settings', 'citymap'];
+
   var el = {}; // populated on DOMContentLoaded
   var state = {
     mode: 'quick',
@@ -68,6 +70,7 @@
     rollAvailable: true,
     rolledThisRound: false,
     inGame: false,
+    previousScreen: 'start',
   };
 
   function $(id) { return document.getElementById(id); }
@@ -77,10 +80,12 @@
       'logoBtn', 'quitConfirmOverlay', 'btnCancelQuit', 'btnConfirmQuit',
       'leaderboardSubmitOverlay', 'leaderboardNameInput', 'leaderboardSubmitError',
       'btnSubmitName', 'btnSkipLeaderboard',
-      'btnViewLeaderboard', 'leaderboardViewOverlay', 'leaderboardSubtitle',
-      'leaderboardList', 'btnCloseLeaderboard', 'btnTabDaily', 'btnTabQuick',
-      'liveCounter', 'btnQuickPlay', 'btnDailyPlay', 'prevBest', 'prevStreak', 'prevGames',
-      'screen-start', 'screen-game', 'screen-results',
+      'btnViewLeaderboard', 'leaderboardSubtitle',
+      'leaderboardList', 'btnLeaderboardBack', 'btnTabDaily', 'btnTabQuick',
+      'liveCounter', 'btnClassic', 'btnDaily', 'btnSelectCity', 'prevBest', 'prevStreak', 'prevGames',
+      'btnMenuLeaderboard', 'btnMenuSettings', 'btnSettingsBack', 'btnToggleSound',
+      'btnCityMapBack',
+      'screen-start', 'screen-game', 'screen-results', 'screen-leaderboard', 'screen-settings', 'screen-citymap',
       'progressDots', 'hudScore', 'hudStreak',
       'propertyImage', 'roundBadge', 'propertyAddress', 'propertyLocation', 'famousBadge', 'propertyCredit',
       'statSqft', 'statBeds', 'statBaths', 'statYear', 'pstatBedsIcon', 'pstatBedsLabel', 'pstatBaths',
@@ -95,13 +100,30 @@
   }
 
   function showScreen(name) {
-    ['start', 'game', 'results'].forEach(function (s) {
+    SCREENS.forEach(function (s) {
       el['screen-' + s].hidden = s !== name;
     });
   }
 
+  function currentScreen() {
+    return SCREENS.find(function (s) { return !el['screen-' + s].hidden; }) || 'start';
+  }
+
+  // Navigate to a "destination" screen (leaderboard/settings/citymap),
+  // remembering where we came from so its back button returns there
+  // instead of always dumping the player back at the main menu.
+  function navigateTo(name) {
+    state.previousScreen = currentScreen();
+    showScreen(name);
+  }
+
+  function goBack() {
+    showScreen(state.previousScreen || 'start');
+  }
+
   function playSfx(audioEl) {
     if (!audioEl) return;
+    if (window.PGSettings && !window.PGSettings.isSoundEnabled()) return;
     try {
       audioEl.currentTime = 0;
       var p = audioEl.play();
@@ -486,7 +508,7 @@
   }
 
   function openLeaderboard(preferredTab) {
-    el.leaderboardViewOverlay.hidden = false;
+    navigateTo('leaderboard');
     loadLeaderboardTab(preferredTab || 'daily');
   }
 
@@ -529,6 +551,21 @@
     el.prevBest.textContent = stats.gamesPlayed ? stats.bestScore.toLocaleString('en-US') : '—';
     el.prevStreak.textContent = stats.gamesPlayed ? stats.bestStreak : '—';
     el.prevGames.textContent = stats.gamesPlayed || 0;
+  }
+
+  // --- Settings -------------------------------------------------------------
+
+  function refreshSoundToggle() {
+    var enabled = window.PGSettings ? window.PGSettings.isSoundEnabled() : true;
+    el.btnToggleSound.classList.toggle('on', enabled);
+    el.btnToggleSound.setAttribute('aria-checked', String(enabled));
+  }
+
+  function toggleSound() {
+    if (!window.PGSettings) return;
+    var next = !window.PGSettings.isSoundEnabled();
+    window.PGSettings.setSoundEnabled(next);
+    refreshSoundToggle();
   }
 
   // --- Confetti (lightweight, no external libs) -------------------------------
@@ -597,10 +634,18 @@
     el.guessSlider.addEventListener('input', updateGuessDisplay);
     el.btnSubmitGuess.addEventListener('click', submitGuess);
     el.btnRollCurrency.addEventListener('click', rollCurrency);
-    el.btnQuickPlay.addEventListener('click', function () { startGame('quick'); });
-    el.btnDailyPlay.addEventListener('click', function () { startGame('daily'); });
+    el.btnClassic.addEventListener('click', function () { startGame('quick'); });
+    el.btnDaily.addEventListener('click', function () { startGame('daily'); });
+    el.btnSelectCity.addEventListener('click', function () { navigateTo('citymap'); });
+    el.btnCityMapBack.addEventListener('click', goBack);
     el.btnPlayAgain.addEventListener('click', function () { startGame(state.mode); });
     el.btnBackHome.addEventListener('click', goHome);
+
+    el.btnMenuLeaderboard.addEventListener('click', function () { openLeaderboard('daily'); });
+    el.btnMenuSettings.addEventListener('click', function () { navigateTo('settings'); refreshSoundToggle(); });
+    el.btnLeaderboardBack.addEventListener('click', goBack);
+    el.btnSettingsBack.addEventListener('click', goBack);
+    el.btnToggleSound.addEventListener('click', toggleSound);
 
     el.logoBtn.addEventListener('click', function () {
       if (state.inGame) {
@@ -628,9 +673,6 @@
 
     el.btnViewLeaderboard.addEventListener('click', function () {
       openLeaderboard(state.mode === 'daily' ? 'daily' : 'quick');
-    });
-    el.btnCloseLeaderboard.addEventListener('click', function () {
-      el.leaderboardViewOverlay.hidden = true;
     });
     el.btnTabDaily.addEventListener('click', function () { loadLeaderboardTab('daily'); });
     el.btnTabQuick.addEventListener('click', function () { loadLeaderboardTab('quick'); });
