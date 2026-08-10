@@ -783,6 +783,25 @@ button { font-family: var(--font-body); }
 .results-card { text-align: center; }
 
 .results-eyebrow { color: var(--text-faint); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+
+.new-best-badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: #2a0016;
+  background: var(--accent-2);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 20px var(--accent-2-glow);
+  animation: new-best-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.new-best-badge[hidden] { display: none; }
+@keyframes new-best-pop {
+  0% { opacity: 0; transform: scale(0.6) translateY(6px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
 .results-score { font-size: clamp(2.6rem, 14vw, 3.6rem); font-weight: 700; color: var(--accent); text-shadow: 0 0 30px var(--accent-glow); }
 .results-score-max { color: var(--text-faint); font-size: 0.85rem; margin-bottom: 18px; }
 

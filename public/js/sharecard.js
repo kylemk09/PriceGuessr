@@ -44,17 +44,24 @@
 
     // Background
     var grad = ctx.createLinearGradient(0, 0, 0, h);
-    grad.addColorStop(0, '#101014');
-    grad.addColorStop(1, '#0a0a0a');
+    grad.addColorStop(0, '#0a0a0c');
+    grad.addColorStop(1, '#060607');
     ctx.fillStyle = grad;
     drawRoundedRect(ctx, 0, 0, w, h, 28);
     ctx.fill();
 
-    // Soft accent glow blob
+    // Two soft accent glow blobs -- lime top-left, magenta bottom-right --
+    // matching the app's neon two-color system.
     var glow = ctx.createRadialGradient(w * 0.5, h * 0.18, 10, w * 0.5, h * 0.18, w * 0.6);
-    glow.addColorStop(0, 'rgba(0,255,157,0.20)');
-    glow.addColorStop(1, 'rgba(0,255,157,0)');
+    glow.addColorStop(0, 'rgba(215,255,62,0.22)');
+    glow.addColorStop(1, 'rgba(215,255,62,0)');
     ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, w, h);
+
+    var glow2 = ctx.createRadialGradient(w * 0.85, h * 0.75, 10, w * 0.85, h * 0.75, w * 0.5);
+    glow2.addColorStop(0, 'rgba(255,46,154,0.14)');
+    glow2.addColorStop(1, 'rgba(255,46,154,0)');
+    ctx.fillStyle = glow2;
     ctx.fillRect(0, 0, w, h);
 
     ctx.textAlign = 'center';
@@ -72,9 +79,9 @@
     ctx.fillText(data.mode === 'daily' ? 'Daily Challenge' : 'Quick Play', w / 2, 122);
 
     // Score
-    ctx.fillStyle = '#00ff9d';
+    ctx.fillStyle = '#d7ff3e';
     ctx.font = '700 96px "Space Grotesk", sans-serif';
-    ctx.shadowColor = 'rgba(0,255,157,0.5)';
+    ctx.shadowColor = 'rgba(215,255,62,0.5)';
     ctx.shadowBlur = 30;
     ctx.fillText(data.score.toLocaleString('en-US'), w / 2, 260);
     ctx.shadowBlur = 0;
@@ -95,9 +102,9 @@
 
     // Streak chip
     drawRoundedRect(ctx, w / 2 - 140, 440, 280, 56, 28);
-    ctx.fillStyle = 'rgba(255,255,255,0.07)';
+    ctx.fillStyle = 'rgba(255,46,154,0.10)';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.strokeStyle = 'rgba(255,46,154,0.35)';
     ctx.stroke();
     ctx.fillStyle = '#f5f6f7';
     ctx.font = '600 24px Inter, sans-serif';

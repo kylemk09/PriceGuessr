@@ -93,7 +93,7 @@
       'sliderMinLabel', 'sliderMaxLabel',
       'revealOverlay', 'revealEmoji', 'revealLabel', 'revealGuess', 'revealActual',
       'revealBarFill', 'revealBarMarker', 'revealError', 'revealPoints', 'revealSource', 'btnNextRound',
-      'resultsEyebrow', 'resultsScore', 'resultsScoreMax', 'resultsEmojiRow',
+      'resultsCard', 'resultsEyebrow', 'newBestBadge', 'resultsScore', 'resultsScoreMax', 'resultsEmojiRow',
       'resultsStreak', 'resultsRank', 'shareCanvas', 'btnCopyResult', 'btnShareResult',
       'btnPlayAgain', 'btnBackHome', 'copyToast', 'sfxSubmit', 'sfxReveal',
     ].forEach(function (id) { el[id] = $(id); });
@@ -352,14 +352,14 @@
     });
 
     if (result.tierId === 'nailed') {
-      el.revealOverlay.querySelector('.reveal-card').classList.add('glow-pulse');
-      burstConfetti();
+      el.revealOverlay.querySelector('.reveal-card').classList.add('glow-pulse', 'shake');
+      burstConfetti(90);
     }
 
     el.btnNextRound.textContent = result.isLastRound ? 'See Results →' : 'Next Round →';
     el.btnNextRound.onclick = function () {
       el.revealOverlay.hidden = true;
-      el.revealOverlay.querySelector('.reveal-card').classList.remove('glow-pulse');
+      el.revealOverlay.querySelector('.reveal-card').classList.remove('glow-pulse', 'shake');
       if (result.isLastRound) {
         loadResults();
       } else {
@@ -438,8 +438,22 @@
     el.btnCopyResult.onclick = function () { copyResult(shareData); };
     el.btnShareResult.onclick = function () { shareResult(shareData); };
 
+    // Capture the previous best BEFORE recordGame() overwrites it, and only
+    // celebrate a "new best" against a real prior game -- not a trivially
+    // "beaten" zero on someone's very first-ever game.
+    var prevStats = window.PGStats ? window.PGStats.load() : null;
+    var isNewBest = !!prevStats && prevStats.gamesPlayed > 0 && data.score > prevStats.bestScore;
+
     if (window.PGStats) window.PGStats.recordGame(data);
     refreshStatsPreview();
+
+    el.newBestBadge.hidden = !isNewBest;
+    if (isNewBest) {
+      el.resultsCard.classList.remove('shake');
+      void el.resultsCard.offsetWidth;
+      el.resultsCard.classList.add('shake');
+      burstConfetti(160);
+    }
 
     // Select City games count toward local stats above (PGStats is mode-
     // agnostic) but aren't eligible for the online leaderboard -- see the
@@ -590,14 +604,14 @@
 
   // --- Confetti (lightweight, no external libs) -------------------------------
 
-  function burstConfetti() {
+  function burstConfetti(count) {
     var canvas = $('confettiCanvas');
     if (!canvas) return;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     var ctx = canvas.getContext('2d');
-    var colors = ['#00ff9d', '#00c97d', '#ffffff', '#a855f7'];
-    var particles = Array.from({ length: 90 }, function () {
+    var colors = ['#d7ff3e', '#ff2e9a', '#3ee8ff', '#ffffff'];
+    var particles = Array.from({ length: count || 90 }, function () {
       return {
         x: canvas.width / 2 + (Math.random() - 0.5) * 120,
         y: canvas.height * 0.35,
