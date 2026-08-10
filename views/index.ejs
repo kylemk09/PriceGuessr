@@ -13,6 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
+  <% if (mapboxConfigured) { %>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" />
+  <% } %>
 </head>
 <body>
   <div class="bg-mesh" aria-hidden="true"></div>
@@ -321,11 +324,15 @@
       mapboxToken: <%- JSON.stringify(mapboxToken) %>,
     };
   </script>
+  <% if (mapboxConfigured) { %>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js" defer></script>
+  <% } %>
   <script src="/js/layout.js" defer></script>
   <script src="/js/ticker.js" defer></script>
   <script src="/js/stats.js" defer></script>
   <script src="/js/settings.js" defer></script>
   <script src="/js/sharecard.js" defer></script>
   <script src="/js/game.js" defer></script>
+  <script src="/js/citymap.js" defer></script>
 </body>
 </html>

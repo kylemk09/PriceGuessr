@@ -360,6 +360,15 @@ button { font-family: var(--font-body); }
   padding: 20px;
 }
 
+.citymap-container {
+  width: 100%;
+  height: 340px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+.citymap-hint { color: var(--text-faint); font-size: 0.76rem; margin: 10px 0 14px; line-height: 1.4; }
+
 /* ---- Settings screen -------------------------------------------------------- */
 
 .settings-row {

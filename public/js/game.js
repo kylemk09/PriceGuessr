@@ -163,6 +163,14 @@
   }
 
   function updateRollButton() {
+    // Select City has no roll concept at all (always the real local
+    // currency) -- hide the button entirely rather than show a disabled
+    // "Roll used" that implies the player missed out on one.
+    if (state.mode === 'city') {
+      el.btnRollCurrency.hidden = true;
+      return;
+    }
+    el.btnRollCurrency.hidden = false;
     el.btnRollCurrency.disabled = !state.rollAvailable;
     el.btnRollCurrency.textContent = state.rollAvailable ? '\u{1F3B2} Roll Available' : '\u{1F3B2} Roll used';
   }
@@ -257,8 +265,23 @@
 
   // --- Game flow ----------------------------------------------------------
 
+  // Shared by both the Classic/Daily start flow below and Select City
+  // (public/js/citymap.js), which fetches /api/game/new itself (it needs
+  // the map's chosen lat/lng in the request body) and then hands the
+  // response off here rather than duplicating this transition.
+  function beginGame(data) {
+    state.mode = data.mode;
+    state.dailyKey = data.dailyKey;
+    state.score = 0;
+    state.streak = 0;
+    state.totalRounds = data.totalRounds;
+    state.inGame = true;
+    updateHud();
+    showScreen('game');
+    renderRound(Object.assign({ roundNumber: data.roundNumber, totalRounds: data.totalRounds }, data.round));
+  }
+
   function startGame(mode) {
-    state.mode = mode;
     fetch('/api/game/new', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -266,14 +289,8 @@
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        state.dailyKey = data.dailyKey;
-        state.score = 0;
-        state.streak = 0;
-        state.totalRounds = data.totalRounds;
-        state.inGame = true;
-        updateHud();
-        showScreen('game');
-        renderRound(Object.assign({ roundNumber: data.roundNumber, totalRounds: data.totalRounds }, data.round));
+        if (data.error) throw new Error(data.error);
+        beginGame(data);
       })
       .catch(function (err) {
         console.error('Failed to start game', err);
@@ -424,7 +441,10 @@
     if (window.PGStats) window.PGStats.recordGame(data);
     refreshStatsPreview();
 
-    if (data.isFirstGame) showLeaderboardPrompt();
+    // Select City games count toward local stats above (PGStats is mode-
+    // agnostic) but aren't eligible for the online leaderboard -- see the
+    // matching guard in server.js's /api/leaderboard/submit.
+    if (data.isFirstGame && data.mode !== 'city') showLeaderboardPrompt();
   }
 
   // --- Leaderboard --------------------------------------------------------
@@ -682,4 +702,8 @@
       if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     });
   });
+
+  // Small public surface for public/js/citymap.js, which needs to hand off
+  // into the normal round flow after it starts a Select City game itself.
+  window.PGGame = { beginGame: beginGame };
 })();
