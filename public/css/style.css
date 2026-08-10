@@ -841,6 +841,40 @@ button { font-family: var(--font-body); }
   .hero-title { font-size: 2.5rem; }
 }
 
+/* ---- Desktop layout: a genuine two-pane split for the game screen --------
+   Driven by public/js/layout.js's live matchMedia check (data-layout on
+   <body>), not this media query alone -- but the query is kept in sync with
+   the same 900px breakpoint so the two never disagree. Mobile keeps the
+   thumb-first stacked column above; desktop pins the property photo/details
+   as a tall left column with the live HUD and guess panel stacked opposite
+   it, instead of the same column just stretched wider. */
+
+body[data-layout='desktop'] .app {
+  max-width: var(--max-w-desktop);
+}
+
+body[data-layout='desktop'] #screen-game:not([hidden]) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas: 'property hud' 'property guess';
+  align-items: start;
+  gap: 20px 28px;
+}
+body[data-layout='desktop'] #screen-game > .game-hud { grid-area: hud; padding: 6px 2px; }
+body[data-layout='desktop'] #propertyCard { grid-area: property; position: sticky; top: 20px; }
+body[data-layout='desktop'] #guessCard { grid-area: guess; }
+body[data-layout='desktop'] .property-image-wrap { aspect-ratio: 1 / 1; }
+
+body[data-layout='desktop'] .leaderboard-card,
+body[data-layout='desktop'] .settings-card,
+body[data-layout='desktop'] .citymap-card,
+body[data-layout='desktop'] .start-card,
+body[data-layout='desktop'] .results-card {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
