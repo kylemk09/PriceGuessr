@@ -56,10 +56,21 @@ app.get('/', (req, res) => {
 // ---- API --------------------------------------------------------------
 
 // Start (or restart) a game. mode: "quick" (fully random) | "daily"
-// (same 5 houses for everyone today, Wordle-style).
+// (same 5 houses for everyone today, Wordle-style) | "city" (5 rounds drawn
+// from a 50km circle the player positioned on the map -- requires lat/lng).
 app.post('/api/game/new', (req, res) => {
-  const mode = req.body && req.body.mode === 'daily' ? 'daily' : 'quick';
-  const game = startNewGame(req.session, mode);
+  const body = req.body || {};
+  let mode = body.mode === 'daily' ? 'daily' : body.mode === 'city' ? 'city' : 'quick';
+  let center;
+  if (mode === 'city') {
+    const lat = Number(body.lat);
+    const lng = Number(body.lng);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+      return res.status(400).json({ error: 'Invalid map location.' });
+    }
+    center = { lat, lng };
+  }
+  const game = startNewGame(req.session, mode, center);
   res.json({
     mode: game.mode,
     dailyKey: game.dailyKey || null,
@@ -114,6 +125,11 @@ app.post('/api/leaderboard/submit', async (req, res) => {
   const game = req.session.game;
   if (!game || game.currentIndex < game.listingIds.length) {
     return res.status(400).json({ error: 'No completed game to submit.' });
+  }
+  if (game.mode === 'city') {
+    // Select City doesn't have its own leaderboard yet, and its games
+    // shouldn't be folded into the Quick Play board either.
+    return res.status(400).json({ error: 'Select City games aren\'t eligible for the leaderboard yet.' });
   }
   const name = req.body && req.body.name;
   if (!name || !String(name).trim()) {

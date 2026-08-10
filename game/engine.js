@@ -46,7 +46,43 @@ function todayKey() {
   return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
-function pickListingIds(mode) {
+const EARTH_RADIUS_KM = 6371;
+const CITY_MODE_START_RADIUS_KM = 50;
+const CITY_MODE_MAX_RADIUS_KM = 12800; // ~half Earth's circumference -- guarantees termination
+
+function haversineKm(lat1, lng1, lat2, lng2) {
+  const toRad = (d) => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return EARTH_RADIUS_KM * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// Select City: candidate pool is every listing with coordinates (US/Canada
+// only -- see data/generate-listings.js) within a radius of the player's
+// chosen point. The circle shown on the map always stays a visual 50km;
+// if fewer than ROUNDS_PER_GAME listings fall inside it, we silently widen
+// the real search radius (doubling) so the game never dead-ends in a
+// low-density area, without ever changing what's drawn on the map.
+function pickCityListingIds(center) {
+  const geocoded = listings.filter((l) => typeof l.lat === 'number' && typeof l.lng === 'number');
+  let radius = CITY_MODE_START_RADIUS_KM;
+  let candidates = [];
+  while (radius <= CITY_MODE_MAX_RADIUS_KM) {
+    candidates = geocoded.filter((l) => haversineKm(center.lat, center.lng, l.lat, l.lng) <= radius);
+    if (candidates.length >= ROUNDS_PER_GAME) break;
+    radius *= 2;
+  }
+  // Absolute fallback (should be unreachable with any real US/Canada point
+  // given the current dataset, but guarantees a full game either way).
+  const pool = candidates.length >= ROUNDS_PER_GAME ? candidates : geocoded;
+  const rng = Math.random;
+  return shuffled(pool.map((l) => l.id), rng).slice(0, ROUNDS_PER_GAME);
+}
+
+function pickListingIds(mode, center) {
   const allIds = listings.map((l) => l.id);
   if (mode === 'daily') {
     // v2 idea: incorporate a stable puzzle number (days since launch) into
@@ -56,14 +92,17 @@ function pickListingIds(mode) {
     const rng = mulberry32(hashString(`valueguessr-${key}`));
     return { ids: shuffled(allIds, rng).slice(0, ROUNDS_PER_GAME), dailyKey: key };
   }
+  if (mode === 'city' && center) {
+    return { ids: pickCityListingIds(center), dailyKey: null };
+  }
   const rng = Math.random;
   return { ids: shuffled(allIds, rng).slice(0, ROUNDS_PER_GAME), dailyKey: null };
 }
 
 // --- Public API --------------------------------------------------------
 
-function startNewGame(session, mode) {
-  const { ids, dailyKey } = pickListingIds(mode);
+function startNewGame(session, mode, center) {
+  const { ids, dailyKey } = pickListingIds(mode, center);
   session.game = {
     mode,
     dailyKey,
@@ -100,7 +139,9 @@ function getPublicRound(game, index) {
     imageCredit: listing.imageCredit || null,
     isFamous: !!listing.isFamous,
     currency: getCurrency(listing.currency),
-    rollAvailable: !game.rollUsed,
+    // Select City is scoped to the US/Canada and always guesses in the
+    // listing's own real currency -- no random-currency wildcard there.
+    rollAvailable: game.mode !== 'city' && !game.rollUsed,
     // NOTE: priceSource is withheld here (it usually names the actual sale
     // price in prose, e.g. "Sold 2016 for $100M") -- it's only revealed in
     // the guess result below, alongside the real price.
@@ -117,6 +158,9 @@ function useRoll(session) {
   if (!game) return { error: 'No active game. Start a new one.' };
   if (game.currentIndex >= game.listingIds.length) {
     return { error: 'Game already finished.' };
+  }
+  if (game.mode === 'city') {
+    return { error: 'Roll isn\'t available in Select City mode.' };
   }
   if (game.rollUsed) {
     return { error: 'Roll already used this game.' };
