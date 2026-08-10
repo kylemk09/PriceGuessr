@@ -277,6 +277,8 @@
     window.__PRICEGUESSR__ = {
       totalListings: <%= totalListings %>,
       roundsPerGame: <%= roundsPerGame %>,
+      mapboxConfigured: <%- mapboxConfigured ? 'true' : 'false' %>,
+      mapboxToken: <%- JSON.stringify(mapboxToken) %>,
     };
   </script>
   <script src="/js/ticker.js" defer></script>

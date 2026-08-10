@@ -23,6 +23,7 @@ const {
 const { submitScore, getTop } = require('./game/leaderboard');
 const { getGamesPlayedCount } = require('./game/playCounter');
 const { initSchema } = require('./lib/db');
+const mapboxConfig = require('./lib/mapboxConfig');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -50,6 +51,8 @@ app.get('/', (req, res) => {
   res.render('index', {
     totalListings: listings.length,
     roundsPerGame: ROUNDS_PER_GAME,
+    mapboxConfigured: mapboxConfig.isConfigured(),
+    mapboxToken: mapboxConfig.getToken() || '',
   });
 });
 
