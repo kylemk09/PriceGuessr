@@ -1,15 +1,22 @@
 /* ==========================================================================
-   ValueGuessr — dark, glassy, neon-green themed styling.
+   ValueGuessr V1.01 — bold, high-contrast, made-for-screen-recording styling.
+   Two-color neon accent system (acid lime + hot magenta, thin cyan flourish)
+   on near-black, chunky tactile buttons, punchy motion.
    Mobile-first: the whole layout is built for a phone-width column first,
-   then just gains breathing room on wider viewports.
+   then genuinely restructures (not just widens) past the desktop breakpoint
+   -- see the [data-layout="desktop"] rules near the bottom of this file.
    ========================================================================== */
 
 :root {
-  --bg: #0a0a0a;
-  --bg-2: #0d0d0f;
-  --accent: #00ff9d;
-  --accent-dim: #00c97d;
-  --accent-glow: rgba(0, 255, 157, 0.45);
+  --bg: #060607;
+  --bg-2: #0a0a0c;
+  --accent: #d7ff3e;
+  --accent-dim: #b8e01f;
+  --accent-glow: rgba(215, 255, 62, 0.45);
+  --accent-2: #ff2e9a;
+  --accent-2-glow: rgba(255, 46, 154, 0.45);
+  --accent-3: #3ee8ff;
+  --accent-3-glow: rgba(62, 232, 255, 0.4);
   --text: #f5f6f7;
   --text-dim: #a1a1aa;
   --text-faint: #6b6b74;
@@ -18,12 +25,13 @@
   --glass-border: rgba(255, 255, 255, 0.12);
   --danger: #ff4d5e;
   --warn: #ffcc4d;
-  --radius-lg: 22px;
-  --radius-md: 14px;
-  --radius-sm: 9px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
   --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --max-w: 560px;
+  --max-w-desktop: 1080px;
 }
 
 * { box-sizing: border-box; }
@@ -58,9 +66,9 @@ button { font-family: var(--font-body); }
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(ellipse 60% 40% at 20% 0%, rgba(0, 255, 157, 0.14), transparent 60%),
-    radial-gradient(ellipse 50% 35% at 100% 20%, rgba(168, 85, 247, 0.10), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(0, 255, 157, 0.08), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(215, 255, 62, 0.16), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 100% 15%, rgba(255, 46, 154, 0.14), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 50% 100%, rgba(62, 232, 255, 0.08), transparent 60%),
     var(--bg-2);
   pointer-events: none;
 }
@@ -118,8 +126,8 @@ button { font-family: var(--font-body); }
 .brand-btn:active { transform: scale(0.96); }
 
 .brand-mark { width: 32px; height: 32px; flex-shrink: 0; overflow: visible; }
-.brand-mark-bg { fill: rgba(0, 255, 157, 0.1); stroke: rgba(0, 255, 157, 0.35); stroke-width: 1.5; transition: fill 0.2s ease; }
-.brand-btn:hover .brand-mark-bg { fill: rgba(0, 255, 157, 0.18); }
+.brand-mark-bg { fill: rgba(215, 255, 62, 0.1); stroke: rgba(215, 255, 62, 0.35); stroke-width: 1.5; transition: fill 0.2s ease; }
+.brand-btn:hover .brand-mark-bg { fill: rgba(215, 255, 62, 0.18); }
 .brand-mark-house { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
 .brand-mark-trend { fill: none; stroke: var(--text); stroke-width: 2.1; stroke-linejoin: round; stroke-linecap: round; }
 
@@ -205,33 +213,48 @@ button { font-family: var(--font-body); }
 
 /* ---- Buttons --------------------------------------------------------------- */
 
+/* Chunky, tactile "3D" buttons: a solid (not blurred) bottom-edge shadow
+   that collapses as the button presses down into it, instead of just a
+   hover glow -- meant to read clearly in a screen recording. */
 .btn {
   border: none;
   cursor: pointer;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 800;
   font-family: var(--font-display);
   letter-spacing: 0.01em;
-  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+  transform: translateY(0);
+  transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s ease, opacity 0.2s ease, background 0.2s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.btn:active { transform: scale(0.96); }
+.btn:active { transform: translateY(3px) scale(0.97); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.btn-lg { width: 100%; padding: 16px 20px; font-size: 1.02rem; }
+.btn-lg { width: 100%; padding: 18px 22px; font-size: 1.08rem; }
 
 .btn-primary {
   background: var(--accent);
-  color: #04140c;
-  box-shadow: 0 0 0 rgba(0, 255, 157, 0), 0 6px 24px -4px var(--accent-glow);
+  color: #0a1400;
+  box-shadow: 0 4px 0 var(--accent-dim), 0 10px 30px -8px var(--accent-glow);
 }
-.btn-primary:hover { box-shadow: 0 0 26px var(--accent-glow), 0 6px 24px -4px var(--accent-glow); }
+.btn-primary:hover { box-shadow: 0 4px 0 var(--accent-dim), 0 0 28px var(--accent-glow), 0 10px 30px -8px var(--accent-glow); }
+.btn-primary:active { box-shadow: 0 1px 0 var(--accent-dim); }
+
+.btn-secondary {
+  background: var(--accent-2);
+  color: #2a0016;
+  box-shadow: 0 4px 0 #c4127a, 0 10px 30px -8px var(--accent-2-glow);
+}
+.btn-secondary:hover { box-shadow: 0 4px 0 #c4127a, 0 0 28px var(--accent-2-glow), 0 10px 30px -8px var(--accent-2-glow); }
+.btn-secondary:active { box-shadow: 0 1px 0 #c4127a; }
 
 .btn-ghost {
   background: var(--glass-bg-strong);
   color: var(--text);
   border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 0 rgba(255, 255, 255, 0.08);
 }
+.btn-ghost:active { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08); }
 
 .btn-outline {
   background: transparent;
@@ -244,12 +267,13 @@ button { font-family: var(--font-body); }
 
 /* ---- Start screen ----------------------------------------------------------- */
 
-.start-card { text-align: center; padding-top: 34px; }
+.start-card { position: relative; text-align: center; padding-top: 34px; }
 
 .hero-title {
-  font-size: clamp(1.7rem, 7vw, 2.3rem);
-  line-height: 1.15;
-  font-weight: 700;
+  font-size: clamp(1.9rem, 8vw, 2.6rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   margin-bottom: 10px;
 }
 
@@ -261,8 +285,8 @@ button { font-family: var(--font-body); }
   gap: 6px;
   font-size: 0.82rem;
   color: var(--text-dim);
-  background: rgba(0, 255, 157, 0.08);
-  border: 1px solid rgba(0, 255, 157, 0.25);
+  background: rgba(215, 255, 62, 0.08);
+  border: 1px solid rgba(215, 255, 62, 0.25);
   padding: 8px 14px;
   border-radius: 999px;
   margin-bottom: 22px;
@@ -287,6 +311,22 @@ button { font-family: var(--font-body); }
 .start-actions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
 
 .daily-hint { font-size: 0.72rem; color: var(--text-faint); line-height: 1.4; }
+
+.version-tag {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  padding: 3px 8px;
+  border-radius: 999px;
+  pointer-events: none;
+}
 
 /* ---- Game HUD --------------------------------------------------------------- */
 
@@ -328,9 +368,9 @@ button { font-family: var(--font-body); }
 
 .famous-badge {
   position: absolute; top: 12px; left: 12px;
-  background: rgba(0, 255, 157, 0.16);
+  background: rgba(215, 255, 62, 0.16);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(0, 255, 157, 0.4);
+  border: 1px solid rgba(215, 255, 62, 0.4);
   color: var(--accent);
   font-size: 0.7rem;
   font-weight: 700;
@@ -380,8 +420,8 @@ button { font-family: var(--font-body); }
 }
 .currency-badge.rolled {
   color: var(--accent);
-  background: rgba(0, 255, 157, 0.12);
-  border-color: rgba(0, 255, 157, 0.4);
+  background: rgba(215, 255, 62, 0.12);
+  border-color: rgba(215, 255, 62, 0.4);
   box-shadow: 0 0 10px var(--accent-glow);
 }
 
@@ -390,8 +430,8 @@ button { font-family: var(--font-body); }
   font-weight: 700;
   font-family: var(--font-display);
   color: var(--text);
-  background: rgba(168, 85, 247, 0.14);
-  border: 1px solid rgba(168, 85, 247, 0.4);
+  background: rgba(255, 46, 154, 0.14);
+  border: 1px solid rgba(255, 46, 154, 0.4);
   padding: 4px 10px;
   border-radius: 999px;
   cursor: pointer;
@@ -607,7 +647,7 @@ button { font-family: var(--font-body); }
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.leaderboard-tab.active { background: rgba(0, 255, 157, 0.14); border-color: rgba(0, 255, 157, 0.4); color: var(--accent); }
+.leaderboard-tab.active { background: rgba(215, 255, 62, 0.14); border-color: rgba(215, 255, 62, 0.4); color: var(--accent); }
 
 .leaderboard-subtitle { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
 
