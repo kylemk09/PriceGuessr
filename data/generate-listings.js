@@ -511,6 +511,95 @@ function buildFamousCommercialListing(id, prop) {
   };
 }
 
+// Extra synthetic US/Canada listings built directly from a real-world city
+// grid (data/research/us-canada-grid.json) rather than from a fresh photo
+// batch -- there isn't a fresh multi-hundred-photo research pool to draw on
+// at this scale, so these reuse the SAME real, freely-licensed photos
+// gathered above (a photo can now appear on more than one listing). That's
+// consistent with the existing "regular" listing disclaimer: the photo is
+// real, but a regular (non-famous) listing's address/price was already
+// illustrative, not a claim that this exact photographed house sits at
+// this exact address. Purpose-built for Select City mode, which needs real
+// geographic spread across the whole US/Canada, not just wherever the
+// photo research happened to turn up houses. Appended after everything
+// else below so it can't perturb the existing dataset's PRNG sequence.
+function buildGridListing(id, gridEntry, index) {
+  const isCommercial = index % 5 === 4; // ~1 in 5, for category variety
+  const currency = gridEntry.country === 'CA' ? 'CAD' : 'USD';
+  const mult = multiplierFor(`${gridEntry.city}, ${gridEntry.state}`);
+  const streetNum = randInt(100, 9999);
+  const address = `${streetNum} ${pick(STREET_NAMES)} ${pick(STREET_TYPES)}`;
+
+  if (isCommercial) {
+    const photo = dedupedCommercialPhotos[index % dedupedCommercialPhotos.length];
+    const buildingType = COMMERCIAL_TYPES.includes(photo.suggestedBuildingType) ? photo.suggestedBuildingType : 'Office Building';
+    const floors = photo.suggestedFloors && photo.suggestedFloors > 0 ? photo.suggestedFloors : randInt(1, 3);
+    const sqftPerFloor = randInt(4000, 14000);
+    const sqft = Math.round((floors * sqftPerFloor) / 100) * 100;
+    const yearBuilt = randInt(1920, 2022);
+    const ageFactor = yearBuilt > 2010 ? 1.08 : yearBuilt < 1960 ? 0.9 : 1.0;
+    const basePricePerSqft = randInt(90, 220);
+    let price = sqft * basePricePerSqft * mult * ageFactor;
+    price *= 0.9 + rand() * 0.2;
+    price = humanizePrice(price);
+
+    return {
+      id,
+      address,
+      city: gridEntry.city,
+      state: gridEntry.state,
+      homeType: buildingType,
+      category: 'commercial',
+      currency,
+      price,
+      sqft,
+      beds: null,
+      baths: null,
+      floors,
+      yearBuilt,
+      image: photo.imageUrl,
+      imageCredit: `${photo.attribution} — ${photo.license}, via Wikimedia Commons`,
+      isFamous: false,
+      lat: gridEntry.lat,
+      lng: gridEntry.lng,
+    };
+  }
+
+  const photo = dedupedResidentialPhotos[index % dedupedResidentialPhotos.length];
+  const homeType = HOME_TYPES.includes(photo.suggestedHomeType) ? photo.suggestedHomeType : 'Single Family';
+  const beds = randInt(1, 6);
+  const baths = Math.max(1, Math.min(5, beds - randInt(0, 1) + (rand() > 0.5 ? 1 : 0)));
+  const baseSqftPerBed = randInt(380, 620);
+  const sqft = Math.round((beds * baseSqftPerBed + randInt(-150, 400)) / 10) * 10;
+  const yearBuilt = randInt(1910, 2024);
+  const ageFactor = yearBuilt > 2015 ? 1.12 : yearBuilt < 1960 ? 0.92 : 1.0;
+  const basePricePerSqft = randInt(140, 260);
+  let price = sqft * basePricePerSqft * mult * ageFactor;
+  price *= 0.9 + rand() * 0.2;
+  price = humanizePrice(price);
+
+  return {
+    id,
+    address,
+    city: gridEntry.city,
+    state: gridEntry.state,
+    homeType,
+    category: 'residential',
+    currency,
+    price,
+    sqft,
+    beds,
+    baths,
+    floors: null,
+    yearBuilt,
+    image: photo.imageUrl,
+    imageCredit: `${photo.attribution} — ${photo.license}, via Wikimedia Commons`,
+    isFamous: false,
+    lat: gridEntry.lat,
+    lng: gridEntry.lng,
+  };
+}
+
 const residentialPhotosBatch1 = require('./research/commons-house-photos.json');
 const residentialPhotosBatch2 = require('./research/commons-house-photos-batch2.json');
 const residentialPhotosBatch3 = require('./research/commons-house-photos-batch3.json');
@@ -518,6 +607,7 @@ const commercialPhotosBatch1 = require('./research/commons-commercial-photos.jso
 const commercialPhotosBatch2 = require('./research/commons-commercial-photos-batch2.json');
 const famousProperties = require('./research/famous-properties.json');
 const famousCommercialProperties = require('./research/famous-commercial-properties.json');
+const usCanadaGrid = require('./research/us-canada-grid.json');
 
 const dedupedResidentialPhotos = dedupePhotos([...residentialPhotosBatch1, ...residentialPhotosBatch2, ...residentialPhotosBatch3]);
 const dedupedCommercialPhotos = dedupePhotos([...commercialPhotosBatch1, ...commercialPhotosBatch2]);
@@ -527,8 +617,15 @@ const residentialListings = dedupedResidentialPhotos.map((photo) => buildRegular
 const commercialListings = dedupedCommercialPhotos.map((photo) => buildCommercialListing(nextId++, photo));
 const famousListings = famousProperties.map((prop) => buildFamousListing(nextId++, prop));
 const famousCommercialListings = famousCommercialProperties.map((prop) => buildFamousCommercialListing(nextId++, prop));
+const gridListings = usCanadaGrid.map((entry, i) => buildGridListing(nextId++, entry, i));
 
-const listings = [...residentialListings, ...commercialListings, ...famousListings, ...famousCommercialListings];
+const listings = [
+  ...residentialListings,
+  ...commercialListings,
+  ...famousListings,
+  ...famousCommercialListings,
+  ...gridListings,
+];
 
 fs.writeFileSync(
   path.join(__dirname, 'listings.json'),
@@ -538,5 +635,6 @@ fs.writeFileSync(
 console.log(
   `Generated ${listings.length} listings -> data/listings.json ` +
     `(${dedupedResidentialPhotos.length} residential + ${dedupedCommercialPhotos.length} commercial + ` +
-    `${famousListings.length} famous residential + ${famousCommercialListings.length} famous commercial)`
+    `${famousListings.length} famous residential + ${famousCommercialListings.length} famous commercial + ` +
+    `${gridListings.length} US/Canada grid-coverage listings)`
 );
